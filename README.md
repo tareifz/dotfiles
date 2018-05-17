@@ -1,8 +1,26 @@
+## Preview
+
+### Emacs
+
+![Emacs Lisp](./resources/emacs-lisp.png "Emacs Lisp")
+
+![Emacs Rust](./resources/emacs-rust.png "Emacs Rust-Mode")
+
+---
+
+### Bash
+
+![Bash Colors](./resources/terminal.png "Custom Prompt")
+
+---
+
 ## Prerequisite
 
 GNU Stow
 
 `apt install stow`
+
+---
 
 ## Usage
 
