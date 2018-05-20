@@ -6,13 +6,13 @@
 
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ] ; then
-			STAT=`parse_git_dirty`
-			echo -e "[\e[48;5;63m${BRANCH}${STAT}\e[0m]"
-	else
-			echo ""
-	fi
+		BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+		if [ ! "${BRANCH}" == "" ] ; then
+				STAT=`parse_git_dirty`
+				echo "[${BRANCH}${STAT}]"
+		else
+				echo ""
+		fi
 }
 
 # get current status of git repo
@@ -51,11 +51,11 @@ function parse_git_dirty {
 }
 
 function number_of_files() {
-		echo -e '\e[48;5;204m$(ls -1 | wc -l | sed "s: ::g") files\e[0m'
+		echo '[\[\033[48;5;204m\]$(ls -1 | wc -l | sed "s: ::g") files\[\033[0m\]'
 }
 
 function files_size() {
-		echo -e '\e[30;48;5;15m$(ls -sh | head -n1 | sed "s/total //")\e[0m'
+		echo '\[\033[30;48;5;15m\]$(ls -sh | head -n1 | sed "s/total //")\[\033[0m\]]'
 }
 
 function user_or_root() {
@@ -63,15 +63,13 @@ function user_or_root() {
 }
 
 function print_user() {
-		echo -e "\e[30;48;5;82m\u\e[0m"
+		echo '\[\033[30;48;5;82m\][\u]\[\033[0m\]'
 }
 
 function print_directory() {
-		echo -e "\e[48;5;27m\w\e[0m"
+		echo '\[\033[48;5;27m\][\w]\[\033[0m\]'
 }
 
-
-FIRST_LINE="┌[`print_user`]─[`print_directory`]"
-SECOND_LINE="└─[`number_of_files`, `files_size`]─\`parse_git_branch\`─> "
-
-export PS1="\n$FIRST_LINE\n$SECOND_LINE"
+export PS1="\n\
+┌$(print_user)─$(print_directory)\n\
+└─$(number_of_files), $(files_size)─\[\033[48;5;63m\]\`parse_git_branch\`\[\033[0m\]─> "

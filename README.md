@@ -1,19 +1,3 @@
-## Preview
-
-### Emacs
-
-![Emacs Lisp](./resources/emacs-lisp.png "Emacs Lisp")
-
-![Emacs Rust](./resources/emacs-rust.png "Emacs Rust-Mode")
-
----
-
-### Bash
-
-![Bash Colors](./resources/terminal.png "Custom Prompt")
-
----
-
 ## Prerequisite
 
 GNU Stow
@@ -32,3 +16,27 @@ In your home directory
 Then `stow your-app`
 
 * `stow bash emacs ...`
+
+---
+
+## Preview
+
+### Emacs
+
+![Emacs Lisp](./resources/emacs-lisp.png "Emacs Lisp")
+
+![Emacs Rust](./resources/emacs-rust.png "Emacs Rust-Mode")
+
+---
+
+### Bash
+
+![Bash Colors](./resources/terminal.png "Custom Prompt")
+
+---
+
+### Theme
+
+![Joker Theme](.resources/joker-dark-theme.png "Joker Theme")
+
+---

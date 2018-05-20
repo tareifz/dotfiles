@@ -171,6 +171,48 @@
 ;; Save/restore opened files and windows configurations
 (desktop-save-mode 1)
 
+;; make typing delete/overwrites selected text
+(delete-selection-mode 1)
+
+;; turn on highlighting current line
+(global-hl-line-mode 1)
+
+;; when a file is updated outside emacs, make it update if it's already opened in emacs
+(global-auto-revert-mode 1)
+
+(defun my-prettify-symbols-list ()
+	"make some word or string show as pretty Unicode symbols"
+	(setq prettify-symbols-alist
+				'(
+					("lambda" . 955) ;; λ
+					("->" . 8594)    ;; →
+					("=>" . 8658)    ;; ⇒
+					("<=" . 8804)		 ;; ≤
+					(">=" . 8805)		 ;; ≥
+					("!=" . 8800)		 ;; ≠
+					("===" . 8801)	 ;; ≡
+					("!==" . 8802)	 ;; ≢
+					)))
+
+(add-hook 'prog-mode-hook 'my-prettify-symbols-list)
+
+;; display “lambda” as “λ”
+(global-prettify-symbols-mode 1)
+;; ############################################ ;;
+;; ################ Tabs Setup ################ ;;
+;; ############################################ ;;
+;; Indent using 2 spaces tab
+(setq-default tab-width 2)
+
+;; insert literal tab instead of invoking indentation command
+(defun my-insert-tab-char ()
+	"Insert a tab char. (ASCII 9, \t)"
+	(interactive)
+	(insert "\t"))
+
+(global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
+;; make tab key call indent command or insert tab character, depending on cursor position
+(setq-default tab-always-indent nil)
 ;; ############################################ ;;
 ;; ############## Ido Mode Setup ############## ;;
 ;; ############################################ ;;
@@ -226,9 +268,7 @@
 ;; ############################################ ;;
 ;; ############# Globel Variables ############# ;;
 ;; ############################################ ;;
-;; Indent using 2 spaces tab
-(setq-default tab-width 2
-							indent-tabs-mode t)
+
 ;; Disable menu bar
 (menu-bar-mode -1)
 ;; Disable tool bar
@@ -240,7 +280,9 @@
 ;; Every time bookmark is changed, automatically save it
 (setq bookmark-save-flag 1)
 ;; font settings
-(set-default-font "More Perfect DOS VGA")
+(set-default-font "Ubuntu Mono")
+;; (set-default-font "More Perfect DOS VGA")
+;; (set-default-font "Unifont")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
