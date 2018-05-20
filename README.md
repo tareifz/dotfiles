@@ -37,6 +37,6 @@ Then `stow your-app`
 
 ### Theme
 
-![Joker Theme](.resources/joker-dark-theme.png "Joker Theme")
+![Joker Theme](./resources/joker-dark-theme.png "Joker Theme")
 
 ---
