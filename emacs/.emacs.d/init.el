@@ -121,7 +121,8 @@
 (use-package neotree
 	:bind(("<f5>" . neotree-toggle))
 	:config
-	(setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+	(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+	(setq-default neo-show-hidden-files t))
 
 (use-package symon
 	:config
@@ -280,9 +281,10 @@
 ;; Every time bookmark is changed, automatically save it
 (setq bookmark-save-flag 1)
 ;; font settings
-(set-default-font "Ubuntu Mono")
+;; (set-default-font "Ubuntu Mono")
 ;; (set-default-font "More Perfect DOS VGA")
 ;; (set-default-font "Unifont")
+(set-default-font "Dejavu Sans Mono")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

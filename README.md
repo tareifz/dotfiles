@@ -37,6 +37,6 @@ Then `stow your-app`
 
 ### Theme
 
-![Joker Theme](./resources/joker-dark-theme.png "Joker Theme")
+![Mac OS X 11 Theme](./resources/osx-11-theme.png "OS X 11 Theme")
 
 ---
