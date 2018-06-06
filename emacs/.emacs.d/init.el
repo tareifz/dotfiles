@@ -72,14 +72,7 @@
 (use-package sourcerer-theme)
 (use-package prassee-theme)
 (use-package dracula-theme)
-(use-package ample-theme
-	:init
-	(progn (load-theme 'ample t t)
-				 (load-theme 'ample-flat t t)
-				 (load-theme 'ample-light t t)
-				 (enable-theme 'ample-flat))
-	:defer t
-	:ensure t)
+(use-package atom-one-dark-theme)
 
 (use-package org)
 
@@ -131,6 +124,11 @@
 (use-package telephone-line
 	:config
 	(telephone-line-mode 1))
+
+(use-package which-key
+	:config
+	(which-key-mode)
+	(which-key-setup-side-window-right-bottom))
 
 ;; ############################################ ;;
 ;; ############# Editer User Info ############# ;;
@@ -206,14 +204,14 @@
 (setq-default tab-width 2)
 
 ;; insert literal tab instead of invoking indentation command
-(defun my-insert-tab-char ()
-	"Insert a tab char. (ASCII 9, \t)"
-	(interactive)
-	(insert "\t"))
+;; (defun my-insert-tab-char ()
+;;	"Insert a tab char. (ASCII 9, \t)"
+;;	(interactive)
+;;	(insert "\t"))
 
-(global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
+;; (global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
 ;; make tab key call indent command or insert tab character, depending on cursor position
-(setq-default tab-always-indent nil)
+;; (setq-default tab-always-indent nil)
 ;; ############################################ ;;
 ;; ############## Ido Mode Setup ############## ;;
 ;; ############################################ ;;
@@ -296,7 +294,7 @@
  '(company-tooltip-align-annotations t)
  '(package-selected-packages
 	 (quote
-		(moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
+		(atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
