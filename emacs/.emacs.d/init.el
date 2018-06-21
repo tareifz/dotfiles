@@ -16,6 +16,8 @@
 		(package-install 'use-package)))
 
 (require 'use-package)
+(require 'bind-key)
+
 ;; install packages if not in the system.
 (setq use-package-always-ensure t)
 
@@ -130,6 +132,29 @@
 	(which-key-mode)
 	(which-key-setup-side-window-right-bottom))
 
+(use-package expand-region
+	:ensure t
+	:bind ("C-=" . er/expand-region))
+
+;; ############################################ ;;
+;; ############# Custom Functions ############# ;;
+;; ############################################ ;;
+(defun tareifz-kill-line ()
+	"Killing current line with the new line character, and put the cursor
+at the beginning of the line."
+	(interactive)
+	(let (line-begin line-end)
+		(setq line-begin (line-beginning-position))
+		(setq line-end (if (= (point-max) (line-end-position))
+											 (progn
+												 (line-end-position))
+										 (progn
+											 (next-line)
+											 (line-beginning-position))))
+		(kill-region line-begin line-end)
+		(beginning-of-line))
+	)
+
 ;; ############################################ ;;
 ;; ############# Editer User Info ############# ;;
 ;; ############################################ ;;
@@ -197,6 +222,10 @@
 
 ;; display “lambda” as “λ”
 (global-prettify-symbols-mode 1)
+
+;; override [C-k] (kill-to-end-of-line)
+;; the bind-key* (with star) will override key bindings in all minor modes
+(bind-key* "C-k" 'tareifz-kill-line)
 ;; ############################################ ;;
 ;; ################ Tabs Setup ################ ;;
 ;; ############################################ ;;
@@ -294,7 +323,7 @@
  '(company-tooltip-align-annotations t)
  '(package-selected-packages
 	 (quote
-		(atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
+		(elmacro expand-region atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
