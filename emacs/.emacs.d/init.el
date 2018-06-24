@@ -21,26 +21,10 @@
 ;; install packages if not in the system.
 (setq use-package-always-ensure t)
 
-;; auto-complete engine.
-(use-package company
-	:config
-	(global-company-mode t))
-
 ;; auto-close parens.
 (use-package smartparens
 	:config
 	(smartparens-global-mode t))
-
-;; minor mode that keeps your code always indented.
-(use-package aggressive-indent
-	:config
-	(global-aggressive-indent-mode t))
-
-;; shows the cursor position.
-(use-package beacon
-	:custom
-	(beacon-mode t "turn on beacon mode.")
-	(beacon-blink-when-focused t "let the cursor blink when focused."))
 
 ;; represent colors with the color they represent as background.
 (use-package rainbow-mode
@@ -53,10 +37,26 @@
 	:config
 	(add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+;; minor mode that keeps your code always indented.
+(use-package aggressive-indent
+	:config
+	(global-aggressive-indent-mode t))
+
+;; shows the cursor position.
+(use-package beacon
+	:custom
+	(beacon-mode t "turn on beacon mode.")
+	(beacon-blink-when-focused t "let the cursor blink when focused."))
+
 ;; commands bar auto complete and suggestion.
 (use-package smex
 	:bind (("M-x" . smex))
 	:config (smex-initialize))
+
+;; auto-complete engine.
+(use-package company
+	:config
+	(global-company-mode t))
 
 ;; rust-lang support.
 (use-package rust-mode
@@ -133,15 +133,27 @@
 	(which-key-setup-side-window-right-bottom))
 
 (use-package expand-region
-	:ensure t
 	:bind ("C-=" . er/expand-region))
+
+(use-package flycheck
+	:init (global-flycheck-mode)
+	:config
+	(flycheck-add-mode 'javascript-eslint 'web-mode))
+
+(use-package flycheck-inline
+	:requires (flycheck)
+	:config	(flycheck-inline-mode 1))
+
+(use-package flycheck-rust
+	:requires (flycheck)
+	:hook (rust-mode . flycheck-rust-setup))
+
 
 ;; ############################################ ;;
 ;; ############# Custom Functions ############# ;;
 ;; ############################################ ;;
 (defun tareifz-kill-line ()
-	"Killing current line with the new line character, and put the cursor
-at the beginning of the line."
+	"Killing current line with the new line character, and put the cursor at the beginning of the line."
 	(interactive)
 	(let (line-begin line-end)
 		(setq line-begin (line-beginning-position))
@@ -149,7 +161,7 @@ at the beginning of the line."
 											 (progn
 												 (line-end-position))
 										 (progn
-											 (next-line)
+											 (forward-line 1)
 											 (line-beginning-position))))
 		(kill-region line-begin line-end)
 		(beginning-of-line))
@@ -205,7 +217,7 @@ at the beginning of the line."
 (global-auto-revert-mode 1)
 
 (defun my-prettify-symbols-list ()
-	"make some word or string show as pretty Unicode symbols"
+	"Make some word or string show as pretty Unicode symbols."
 	(setq prettify-symbols-alist
 				'(
 					("lambda" . 955) ;; λ
@@ -308,10 +320,10 @@ at the beginning of the line."
 ;; Every time bookmark is changed, automatically save it
 (setq bookmark-save-flag 1)
 ;; font settings
-;; (set-default-font "Ubuntu Mono")
-;; (set-default-font "More Perfect DOS VGA")
-;; (set-default-font "Unifont")
-(set-default-font "Dejavu Sans Mono")
+;; (set-frame-font "Ubuntu Mono")
+;; (set-frame-font "More Perfect DOS VGA")
+;; (set-frame-font "Unifont")
+(set-frame-font "Dejavu Sans Mono")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -321,9 +333,12 @@ at the beginning of the line."
  '(beacon-blink-when-focused t)
  '(beacon-mode t)
  '(company-tooltip-align-annotations t)
+ '(custom-safe-themes
+	 (quote
+		("6a23db7bccf6288fd7c80475dc35804c73f9c9769ad527306d2e0eada1f8b466" default)))
  '(package-selected-packages
 	 (quote
-		(elmacro expand-region atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
+		(basic-theme emacs-nw-theme late-night-theme late-night emacs-nw McCarthy flycheck-inline flycheck-rust flycheck elmacro expand-region atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
