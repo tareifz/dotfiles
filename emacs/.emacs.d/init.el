@@ -1,7 +1,11 @@
+;;; package --- summery
+;;; Commentary:
+
 ;; ############################################ :;
 ;; ######## Packages & Package Manager ######## ;;
 ;; ############################################ ;;
 
+;;; Code:
 ;; ---------- Initializing ---------- ;;
 (require 'package)
 (setq package-archives
@@ -71,10 +75,19 @@
 	(add-hook 'rust-mode-hook #'racer-mode)
 	(add-hook 'racer-mode-hook #'eldoc-mode))
 
-(use-package sourcerer-theme)
-(use-package prassee-theme)
-(use-package dracula-theme)
-(use-package atom-one-dark-theme)
+;; (use-package sourcerer-theme)
+;; (use-package prassee-theme)
+;; (use-package dracula-theme)
+;; (use-package atom-one-dark-theme)
+
+(load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
+
+(defun load-only-theme ()
+	"Disable all themes and then load a single theme interactively."
+	(interactive)
+	(while custom-enabled-themes
+		(disable-theme (car custom-enabled-themes)))
+	(call-interactively 'load-theme))
 
 (use-package org)
 
@@ -265,7 +278,7 @@
 	(if (version< emacs-version "25")
 			(progn
 				(make-local-variable 'ido-separator)
-				(setq ido-separator "\n"))
+				(setq ido-decorations "\n"))
 		(progn
 			(make-local-variable 'ido-decorations)
 			(setf (nth 2 ido-decorations) "\n")))
@@ -325,23 +338,4 @@
 ;; (set-frame-font "Unifont")
 (set-frame-font "Dejavu Sans Mono")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(beacon-blink-when-focused t)
- '(beacon-mode t)
- '(company-tooltip-align-annotations t)
- '(custom-safe-themes
-	 (quote
-		("6a23db7bccf6288fd7c80475dc35804c73f9c9769ad527306d2e0eada1f8b466" default)))
- '(package-selected-packages
-	 (quote
-		(basic-theme emacs-nw-theme late-night-theme late-night emacs-nw McCarthy flycheck-inline flycheck-rust flycheck elmacro expand-region atom-one-dark-theme xah-fly-keys which-key moe-theme ample-flat-theme ample-theme telephone-line symon neotree all-the-icons-dired dired-sidebar impatient-mode electric-operator prassee-theme soothe-theme firebelly switch-window use-package sourcerer-theme smex smartparens rainbow-mode rainbow-delimiters racer multiple-cursors company beacon aggressive-indent))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;; init.el ends here
