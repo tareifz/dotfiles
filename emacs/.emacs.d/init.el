@@ -80,6 +80,7 @@
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 
 (defun load-only-theme ()
@@ -132,9 +133,10 @@
 	(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 	(setq-default neo-show-hidden-files t))
 
-(use-package symon
-	:config
-	(symon-mode 1))
+;; good feature but annoying some times.
+;; (use-package symon
+;;	:config
+;;	(symon-mode 1))
 
 (use-package telephone-line
 	:config
@@ -153,9 +155,10 @@
 	:config
 	(flycheck-add-mode 'javascript-eslint 'web-mode))
 
-(use-package flycheck-inline
-	:requires (flycheck)
-	:config	(flycheck-inline-mode 1))
+;; annoying with long error messages (rustc errors)
+;; (use-package flycheck-inline
+;;	:requires (flycheck)
+;;	:config	(flycheck-inline-mode 1))
 
 (use-package flycheck-rust
 	:requires (flycheck)
@@ -338,4 +341,4 @@
 ;; (set-frame-font "Unifont")
 (set-frame-font "Dejavu Sans Mono")
 
-;;; init.el ends here
+;;; init.el ends here.
