@@ -82,6 +82,7 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
+;; (load-file "~/.emacs.d/themes/hopscotch-theme.el")
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
@@ -164,6 +165,12 @@
 	:requires (flycheck)
 	:hook (rust-mode . flycheck-rust-setup))
 
+;; scheme tools for Emacs.
+;; C-c C-b === eval-buffer
+;; C-c C-c === eval-definition.
+(use-package geiser
+	:config
+	(setq geiser-active-implementations '(guile)))
 
 ;; ############################################ ;;
 ;; ############# Custom Functions ############# ;;
