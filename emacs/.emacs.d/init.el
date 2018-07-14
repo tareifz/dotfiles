@@ -76,13 +76,13 @@
 	(add-hook 'racer-mode-hook #'eldoc-mode))
 
 ;; (use-package sourcerer-theme)
-;; (use-package prassee-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
-;; (load-file "~/.emacs.d/themes/hopscotch-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
+(load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
@@ -346,6 +346,7 @@
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-(set-frame-font "Dejavu Sans Mono")
+(set-frame-font "Terminus:antialias=none")
+(set-face-attribute 'default nil :height 120)
 
 ;;; init.el ends here.
