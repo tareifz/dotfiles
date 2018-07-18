@@ -83,7 +83,6 @@
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
 
-
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
 	(interactive)
@@ -171,6 +170,14 @@
 (use-package geiser
 	:config
 	(setq geiser-active-implementations '(guile)))
+
+;; S in key-binding is the shift key
+(use-package vimish-fold
+	:config
+	(vimish-fold-global-mode 1)
+	:bind
+	("C-c C-v" . vimish-fold)
+	("C-S-c C-S-v" . vimish-fold-delete))
 
 ;; ############################################ ;;
 ;; ############# Custom Functions ############# ;;

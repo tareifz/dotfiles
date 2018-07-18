@@ -1,9 +1,8 @@
 (deftheme tareifz-shadows
-	"Created 2018-07-11.")
+	"Created 2018-07-18.")
 
 (custom-theme-set-faces
  'tareifz-shadows
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#4d5d66" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "xos4" :family "Terminus"))))
  '(cursor ((t (:background "dim gray"))))
  '(fixed-pitch ((t nil)))
  '(variable-pitch ((t nil)))
@@ -16,8 +15,8 @@
  '(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- '(font-lock-comment-face ((t (:foreground "medium sea green" :weight bold))))
- '(font-lock-constant-face ((t (:foreground "yellow" :weight bold))))
+ '(font-lock-comment-face ((t (:foreground "dim gray"))))
+ '(font-lock-constant-face ((t (:weight bold))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face)))))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-keyword-face ((t nil)))
@@ -26,7 +25,7 @@
  '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
  '(font-lock-string-face ((t (:foreground "white smoke"))))
- '(font-lock-type-face ((((class grayscale) (background light)) (:weight bold :foreground "Gray90")) (((class grayscale) (background dark)) (:weight bold :foreground "DimGray")) (((class color) (min-colors 88) (background light)) (:foreground "ForestGreen")) (((class color) (min-colors 88) (background dark)) (:foreground "PaleGreen")) (((class color) (min-colors 16) (background light)) (:foreground "ForestGreen")) (((class color) (min-colors 16) (background dark)) (:foreground "PaleGreen")) (((class color) (min-colors 8)) (:foreground "green")) (t (:underline (:color foreground-color :style line) :weight bold))))
+ '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-warning-face ((t (:inherit (error)))))
  '(button ((t (:inherit (link)))))
@@ -45,6 +44,7 @@
  '(lazy-highlight ((t (:background "light sea green" :foreground "white"))))
  '(match ((t (:background "dark violet" :foreground "white"))))
  '(next-error ((t (:inherit (region)))))
- '(query-replace ((t (:inherit (isearch))))))
+ '(query-replace ((t (:inherit (isearch)))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rosy brown" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "xos4" :family "Terminus")))))
 
 (provide-theme 'tareifz-shadows)
