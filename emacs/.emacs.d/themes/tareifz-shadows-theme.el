@@ -1,5 +1,5 @@
 (deftheme tareifz-shadows
-	"Created 2018-07-18.")
+	"Created 2018-07-23.")
 
 (custom-theme-set-faces
  'tareifz-shadows
@@ -45,6 +45,6 @@
  '(match ((t (:background "dark violet" :foreground "white"))))
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:inherit (isearch)))))
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rosy brown" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "xos4" :family "Terminus")))))
+ '(default ((t (:inherit nil :stipple nil :background "gray15" :foreground "tomato" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "xos4" :family "Terminus")))))
 
 (provide-theme 'tareifz-shadows)

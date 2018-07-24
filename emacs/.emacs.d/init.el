@@ -1,9 +1,7 @@
 ;;; package --- summery
 ;;; Commentary:
 
-;; ############################################ :;
 ;; ######## Packages & Package Manager ######## ;;
-;; ############################################ ;;
 
 ;;; Code:
 ;; ---------- Initializing ---------- ;;
@@ -25,47 +23,49 @@
 ;; install packages if not in the system.
 (setq use-package-always-ensure t)
 
+;; [smartparens]
 ;; auto-close parens.
 (use-package smartparens
 	:config
 	(smartparens-global-mode t))
-
+;; [rainbow-mode]
 ;; represent colors with the color they represent as background.
 (use-package rainbow-mode
 	:config
 	(add-hook 'prog-mode-hook #'rainbow-mode))
-
+;; [rainbow-delimiters]
 ;; rainbow parentheses.
 (use-package rainbow-delimiters
 	:requires rainbow-mode
 	:config
 	(add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
+;; [aggressive-indent]
 ;; minor mode that keeps your code always indented.
 (use-package aggressive-indent
 	:config
 	(global-aggressive-indent-mode t))
-
+;; [beacon]
 ;; shows the cursor position.
 (use-package beacon
 	:custom
 	(beacon-mode t "turn on beacon mode.")
 	(beacon-blink-when-focused t "let the cursor blink when focused."))
-
+;; [smex]
 ;; commands bar auto complete and suggestion.
 (use-package smex
 	:bind (("M-x" . smex))
 	:config (smex-initialize))
-
+;; [company]
 ;; auto-complete engine.
 (use-package company
 	:config
 	(global-company-mode t))
-
+;; [rust-mode]
 ;; rust-lang support.
 (use-package rust-mode
-	:custom (company-tooltip-align-annotations t))
-
+	:custom
+	(company-tooltip-align-annotations t))
+;; [racer]
 ;; provide rust code completion with Company.
 ;; rustup component add rust-src
 ;; cargo install racer
@@ -74,11 +74,10 @@
 	:config
 	(add-hook 'rust-mode-hook #'racer-mode)
 	(add-hook 'racer-mode-hook #'eldoc-mode))
-
+;; [themes]
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
@@ -89,19 +88,19 @@
 	(while custom-enabled-themes
 		(disable-theme (car custom-enabled-themes)))
 	(call-interactively 'load-theme))
-
+;; [org-mode]
 (use-package org)
-
+;; [multiple-cursors]
 (use-package multiple-cursors
 	:config
 	(global-set-key (kbd "C->") 'mc/mark-next-like-this)
 	(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 	(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
-
+;; [switch-window]
 (use-package switch-window
 	:config
 	(global-set-key (kbd "C-x o") 'switch-window))
-
+;; [web-mode]
 (use-package web-mode
 	:config
 	(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -112,65 +111,66 @@
 	(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-
+;; [electric-operator]
 (use-package electric-operator
 	:config
 	(add-hook 'rust-mode-hook #'electric-operator-mode)
 	(add-hook 'javascript-mode-hook #'electric-operator-mode)
 	(electric-operator-add-rules-for-mode 'rust-mode
 																				(cons "->" " -> ")))
+;; [impatient-mode]
 ;; M-x httpd-start
 ;; M-x impatient-mode
 ;; http://localhost:8080/imp/
 (use-package impatient-mode)
-
+;; [all-the-icons]
 (use-package all-the-icons)
 ;; M-x all-the-icons-install-fonts
-
+;; [neotree]
 (use-package neotree
 	:bind(("<f5>" . neotree-toggle))
 	:config
 	(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 	(setq-default neo-show-hidden-files t))
-
+;; [symon] {Disabled}
 ;; good feature but annoying some times.
 ;; (use-package symon
 ;;	:config
 ;;	(symon-mode 1))
-
+;; [telephone-line]
 (use-package telephone-line
 	:config
 	(telephone-line-mode 1))
-
+;; [which-key]
 (use-package which-key
 	:config
 	(which-key-mode)
 	(which-key-setup-side-window-right-bottom))
-
+;; [expand-region]
 (use-package expand-region
 	:bind ("C-=" . er/expand-region))
-
+;; [flycheck]
 (use-package flycheck
 	:init (global-flycheck-mode)
 	:config
 	(flycheck-add-mode 'javascript-eslint 'web-mode))
-
+;; [flycheck-inline] {Disabled}
 ;; annoying with long error messages (rustc errors)
 ;; (use-package flycheck-inline
 ;;	:requires (flycheck)
 ;;	:config	(flycheck-inline-mode 1))
-
+;; [flycheck-rust]
 (use-package flycheck-rust
 	:requires (flycheck)
 	:hook (rust-mode . flycheck-rust-setup))
-
+;; [geiser]
 ;; scheme tools for Emacs.
 ;; C-c C-b === eval-buffer
 ;; C-c C-c === eval-definition.
 (use-package geiser
 	:config
 	(setq geiser-active-implementations '(guile)))
-
+;; [vimish-fold]
 ;; S in key-binding is the shift key
 (use-package vimish-fold
 	:config
@@ -179,9 +179,7 @@
 	("C-c C-v" . vimish-fold)
 	("C-S-c C-S-v" . vimish-fold-delete))
 
-;; ############################################ ;;
 ;; ############# Custom Functions ############# ;;
-;; ############################################ ;;
 (defun tareifz-kill-line ()
 	"Killing current line with the new line character, and put the cursor at the beginning of the line."
 	(interactive)
@@ -196,16 +194,11 @@
 		(kill-region line-begin line-end)
 		(beginning-of-line))
 	)
-
-;; ############################################ ;;
 ;; ############# Editer User Info ############# ;;
-;; ############################################ ;;
 (setq user-full-name "Tareif Al-Zamil")
 (setq user-mail-address "root@tareifz.me")
 
-;; ############################################ ;;
 ;; ######### Editer General Settings ########## ;;
-;; ############################################ ;;
 ;; Ask "y" or "n" instead of "yes" or "no". Yes, laziness is great.
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Highlight corresponding parentheses when cursor is on one
@@ -268,9 +261,7 @@
 ;; override [C-k] (kill-to-end-of-line)
 ;; the bind-key* (with star) will override key bindings in all minor modes
 (bind-key* "C-k" 'tareifz-kill-line)
-;; ############################################ ;;
 ;; ################ Tabs Setup ################ ;;
-;; ############################################ ;;
 ;; Indent using 2 spaces tab
 (setq-default tab-width 2)
 
@@ -283,9 +274,7 @@
 ;; (global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
 ;; make tab key call indent command or insert tab character, depending on cursor position
 ;; (setq-default tab-always-indent nil)
-;; ############################################ ;;
 ;; ############## Ido Mode Setup ############## ;;
-;; ############################################ ;;
 (progn
 	;; make buffer switch command do suggestions, also for find-file command
 	(require 'ido)
@@ -315,18 +304,12 @@
 (require 'ido)
 ;; stop ido suggestion when doing a save-as
 (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
-
-;; ############################################ ;;
 ;; ############### Backup Files ############### ;;
-;; ############################################ ;;
 ;; Remove all backup files
 (setq make-backup-files nil)
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
-;; ############################################ ;;
 ;; ############## Files Encoding ############## ;;
-;; ############################################ ;;
 ;; Set locale to UTF8
 (set-language-environment 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -334,10 +317,7 @@
 (set-default-coding-systems 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-
-;; ############################################ ;;
 ;; ############# Globel Variables ############# ;;
-;; ############################################ ;;
 
 ;; Disable menu bar
 (menu-bar-mode -1)
