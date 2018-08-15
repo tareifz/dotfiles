@@ -77,10 +77,10 @@
 ;; [themes]
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
-;; (use-package atom-one-dark-theme)
+(use-package atom-one-dark-theme)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
-(load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
@@ -335,5 +335,8 @@
 ;; (set-frame-font "Unifont")
 (set-frame-font "Terminus:antialias=none")
 (set-face-attribute 'default nil :height 120)
+
+(setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
+(load-file custom-file)
 
 ;;; init.el ends here.
