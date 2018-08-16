@@ -50,26 +50,26 @@ function parse_git_dirty {
 	fi
 }
 
+# \001 stands for \[
+# \002 stands for \]
+
+LTGREEN="\001\e[30;48;5;82m\002"
+LTBLUE="\001\e[48;5;27m\002"
+LTRED="\001\e[48;5;204m\002"
+LTGREY="\001\e[30;48;5;15m\002"
+PURPLE="\001\e[48;5;63m\002"
+RESET_COLOR="\001\e[m\002"
+
 function number_of_files() {
-		echo '[\[\033[48;5;204m\]$(ls -1 | wc -l | sed "s: ::g") files\[\033[0m\]'
+		echo "$(ls -1 | wc -l | sed "s: ::g") files"
 }
 
 function files_size() {
-		echo '\[\033[30;48;5;15m\]$(ls -sh | head -n1 | sed "s/total //")\[\033[0m\]]'
+		echo "$(ls -sh | head -n1 | sed "s/total //")"
 }
 
-function user_or_root() {
-		echo "$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)"
-}
+# Tihs was a nightmare.. we need to use '\[' and '\]' between UNICODE Chars
+# so that the prompt wrap to the next line instead of overwriting the current line.
 
-function print_user() {
-		echo '\[\033[30;48;5;82m\][\u]\[\033[0m\]'
-}
-
-function print_directory() {
-		echo '\[\033[48;5;27m\][\w]\[\033[0m\]'
-}
-
-export PS1="\n\
-┌$(print_user)─$(print_directory)\n\
-└─$(number_of_files), $(files_size)─\[\033[48;5;63m\]\`parse_git_branch\`\[\033[0m\]─> "
+export PS1="\n\[┌\]$LTGREEN[\u]$RESET_COLOR\[─\]$LTBLUE[\w]$RESET_COLOR
+\[└─\][$LTRED\`number_of_files\`$RESET_COLOR, $LTGREY\`files_size\`$RESET_COLOR]\[─\]$PURPLE\`parse_git_branch\`$RESET_COLOR\[─>\] "
