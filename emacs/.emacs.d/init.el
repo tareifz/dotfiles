@@ -81,7 +81,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-(load-file "~/.emacs.d/themes/lorisan-theme.el")
+
+(use-package base16-theme
+	:config
+	(load-theme 'base16-circus t))
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
@@ -328,6 +331,7 @@
 (toggle-scroll-bar -1)
 ;; Display line number
 (global-linum-mode t)
+(setq-default linum-format " %d ")
 ;; Every time bookmark is changed, automatically save it
 (setq bookmark-save-flag 1)
 ;; font settings
@@ -337,7 +341,11 @@
 ;; (set-frame-font "Terminus:antialias=none")
 ;; (set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
-(set-frame-font "Consolas")
+
+;; for arch linux
+(set-frame-font "xos4 Terminus:antialias=none")
+(set-face-attribute 'default nil :height 120)
+
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)

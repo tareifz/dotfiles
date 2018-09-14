@@ -1,0 +1,78 @@
+/**
+ * ROFI Color theme: Base16-summerfruit-light ???
+ * User: tareifz
+ * Copyright: Martin B. Fraga
+ */
+
+/* global settings and color variables */
+* {
+		maincolor:        #1faaaa;
+		highlight:        bold #FF0086;
+		urgentcolor:      #e53714;
+		background-color: #FFFFFF;
+		border-color: @maincolor;
+		text-color: #AAAAAA;
+		scroll-bar-handle:   @maincolor;
+		scroll-bar-bg: #EEEEEE;
+		font: "xos4 Terminus 12";
+}
+
+window {
+		border: 2px solid;
+		anchor: north;
+		location: north;
+		y-offset: 20%;
+}
+
+mainbox {
+		spacing:0px;
+		children: [inputbar, message, sidebar, listview];
+}
+
+listview {
+	 fixed-height: false;
+	 dynamic: true;
+	 scrollbar: true;
+	 spacing: 0px;
+	 padding: 1px 0px 0px 0px;
+	 margin: 0px 0px 1px 0px;
+}
+
+element {
+	 padding: 2px 15px;
+}
+
+#element selected {
+		background-color: #EEE;
+}
+
+scrollbar {
+		background-color: @scroll-bar-bg;
+		handle-color: @scroll-bar-handle;
+		handle-width: 15px;
+}
+
+button selected {
+		text-color:       @maincolor;
+}
+
+inputbar {
+		background-color: @bg;
+		spacing: 0px;
+}
+
+prompt {
+	 padding:6px 9px;
+	 background-color: @maincolor;
+	 text-color: #FFFFFF;
+}
+
+entry {
+		padding:6px 10px;
+		text-color: @maincolor;
+}
+
+case-indicator {
+	 padding:6px 10px;
+	 text-color:@maincolor;
+}
