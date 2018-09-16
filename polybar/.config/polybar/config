@@ -230,8 +230,8 @@ label = %date% %time%
 
 [module/battery]
 type = internal/battery
-battery = BAT1
-adapter = ADP1
+battery = BAT
+adapter = AC
 full-at = 98
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
@@ -312,7 +312,7 @@ interface = eth0
 
 [module/wireless-network]
 inherit = section/network-base
-interface = wlp0s26u1u4i2
+interface = wlp1s0
 
 [settings]
 screenchange-reload = true
