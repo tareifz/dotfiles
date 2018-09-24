@@ -1,6 +1,7 @@
 [user]
 	name = tareifz
 	email = root@tareifz.me
+	signingkey = 453A3C4E3FD943D5
 
 [core]
 	editor = emacs
@@ -28,3 +29,5 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
+[commit]
+	gpgsign = true

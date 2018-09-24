@@ -115,6 +115,10 @@
 	(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+(use-package js2-mode
+	:config
+	(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 ;; [electric-operator]
 (use-package electric-operator
 	:config
@@ -174,14 +178,41 @@
 (use-package geiser
 	:config
 	(setq geiser-active-implementations '(guile)))
-;; [vimish-fold]
-;; S in key-binding is the shift key
-(use-package vimish-fold
+
+;; [flymd]
+;; Live markdown preview
+(use-package flymd
 	:config
-	(vimish-fold-global-mode 1)
-	:bind
-	("C-c C-v" . vimish-fold)
-	("C-S-c C-S-v" . vimish-fold-delete))
+	(setq-default flymd-output-directory "~/.flymd/"))
+
+;; ;; [helm]
+;; ;; Search, completion ...
+(use-package helm
+	:init
+	(setq helm-mode-fuzzy-match        t
+				helm-buffers-fuzzy-matching  t
+				helm-recentf-fuzzy-match     t
+				helm-M-x-fuzzy-match         t
+				helm-full-frame              nil
+				helm-ff-guess-ffap-urls      nil
+				helm-ff-guess-ffap-filenames nil
+				helm-highlight-matches-around-point-max-lines 0)
+	:bind (("M-x" . helm-M-x)
+				 ("C-x b" . helm-buffers-list)
+				 ("C-x C-f" . helm-find-files)
+				 ("C-x C-d" . helm-browse-project)
+				 ("C-c f" . helm-recentf)
+				 ("M-y" . helm-show-kill-ring)
+				 :map helm-map
+				 ("<tab>" . helm-execute-persistent-action)	;; make tab complete action
+				 ("C-i" . helm-execute-persistent-action)
+				 ("C-z" . helm-select-action)
+				 ))
+
+;; ;;(global-set-key (kbd "<f5> s")                       'helm-find)
+
+(use-package helm-ls-git
+	:requires (helm))
 
 ;; ############# Custom Functions ############# ;;
 (defun tareifz-kill-line ()
@@ -226,11 +257,6 @@
 ;; Make ibuffer default
 (defalias 'list-buffers 'ibuffer)
 
-;; Keep a list of recently opened files
-(recentf-mode 1)
-;; Set F7 to list recently opened files
-(global-set-key (kbd "<f7>") 'recentf-open-files)
-
 ;; Save/restore opened files and windows configurations
 (desktop-save-mode 1)
 
@@ -250,11 +276,11 @@
 					("lambda" . 955) ;; λ
 					("->" . 8594)    ;; →
 					("=>" . 8658)    ;; ⇒
-					("<=" . 8804)		 ;; ≤
-					(">=" . 8805)		 ;; ≥
-					("!=" . 8800)		 ;; ≠
-					("===" . 8801)	 ;; ≡
-					("!==" . 8802)	 ;; ≢
+					("<=" . 8804)    ;; ≤
+					(">=" . 8805)    ;; ≥
+					("!=" . 8800)    ;; ≠
+					("===" . 8801)   ;; ≡
+					("!==" . 8802)   ;; ≢
 					)))
 
 (add-hook 'prog-mode-hook 'my-prettify-symbols-list)
@@ -267,17 +293,21 @@
 (bind-key* "C-k" 'tareifz-kill-line)
 ;; ################ Tabs Setup ################ ;;
 ;; Indent using 2 spaces tab
+(setq-default indent-tabs-mode t)
 (setq-default tab-width 2)
+(setq-default default-tab-width 2)
+
+(setq-default js-indent-level 2)
 
 ;; insert literal tab instead of invoking indentation command
-;; (defun my-insert-tab-char ()
-;;	"Insert a tab char. (ASCII 9, \t)"
-;;	(interactive)
-;;	(insert "\t"))
+(defun my-insert-tab-char ()
+	"Insert a tab char. (ASCII 9, \t)"
+	(interactive)
+	(insert "\t"))
 
-;; (global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
+(global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
 ;; make tab key call indent command or insert tab character, depending on cursor position
-;; (setq-default tab-always-indent nil)
+(setq-default tab-always-indent nil)
 ;; ############## Ido Mode Setup ############## ;;
 (progn
 	;; make buffer switch command do suggestions, also for find-file command
@@ -338,13 +368,13 @@
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-;; (set-frame-font "Terminus:antialias=none")
-;; (set-face-attribute 'default nil :height 120)
+(set-frame-font "Terminus:antialias=none")
+(set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
 
 ;; for arch linux
-(set-frame-font "xos4 Terminus:antialias=none")
-(set-face-attribute 'default nil :height 120)
+;; (set-frame-font "xos4 Terminus:antialias=none")
+;; (set-face-attribute 'default nil :height 120)
 
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
