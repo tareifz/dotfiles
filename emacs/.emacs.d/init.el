@@ -78,13 +78,12 @@
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-
 (use-package base16-theme
 	:config
-	(load-theme 'base16-circus t))
+	(load-theme 'base16-summerfruit-light t))
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
