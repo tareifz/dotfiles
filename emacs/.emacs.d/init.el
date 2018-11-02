@@ -81,9 +81,7 @@
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-(use-package base16-theme
-	:config
-	(load-theme 'base16-summerfruit-light t))
+(use-package hydandata-light-theme)
 
 (defun load-only-theme ()
 	"Disable all themes and then load a single theme interactively."
@@ -212,6 +210,9 @@
 
 (use-package helm-ls-git
 	:requires (helm))
+
+(use-package emmet-mode
+	:hook (web-mode . emmet-mode))
 
 ;; ############# Custom Functions ############# ;;
 (defun tareifz-kill-line ()
@@ -367,9 +368,12 @@
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-(set-frame-font "Terminus:antialias=none")
-(set-face-attribute 'default nil :height 120)
+;; (set-frame-font "Terminus:antialias=none")
+;; (set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
+(set-frame-font "Hack")
+(set-face-attribute 'default nil :height 120)
+
 
 ;; for arch linux
 ;; (set-frame-font "xos4 Terminus:antialias=none")
