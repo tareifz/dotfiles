@@ -7,9 +7,9 @@
 ;; ---------- Initializing ---------- ;;
 (require 'package)
 (setq package-archives
-			'(("gnu" . "http://elpa.gnu.org/packages/")
-				("marmalade" . "http://marmalade-repo.org/packages/")
-				("melpa" . "http://melpa.org/packages/")))
+			'(("gnu" . "https://elpa.gnu.org/packages/")
+				("marmalade" . "https://marmalade-repo.org/packages/")
+				("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -22,6 +22,8 @@
 
 ;; install packages if not in the system.
 (setq use-package-always-ensure t)
+
+(use-package try)
 
 ;; [smartparens]
 ;; auto-close parens.
@@ -214,6 +216,11 @@
 (use-package emmet-mode
 	:hook (web-mode . emmet-mode))
 
+(use-package diff-hl
+	:config
+	(global-diff-hl-mode)
+	(diff-hl-flydiff-mode))
+
 ;; ############# Custom Functions ############# ;;
 (defun tareifz-kill-line ()
 	"Killing current line with the new line character, and put the cursor at the beginning of the line."
@@ -304,6 +311,7 @@
 	"Insert a tab char. (ASCII 9, \t)"
 	(interactive)
 	(insert "\t"))
+
 
 (global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
 ;; make tab key call indent command or insert tab character, depending on cursor position
