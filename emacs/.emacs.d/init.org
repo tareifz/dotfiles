@@ -1,0 +1,185 @@
+#+TITLE: Tareifz Emacs Configuration
+#+OPTIONA: toc:4 h:4
+#+STARTUP: showeverything
+#+PROPERTY: header-args:emacs-lisp	:tangle yes
+
+* Configurations
+** Startup
+*** Package Archives
+		list of some of emacs packages archive repositories:
+
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-archives
+			'(("gnu" . "https://elpa.gnu.org/packages/")
+				("marmalade" . "https://marmalade-repo.org/packages/")
+				("melpa" . "https://melpa.org/packages/")))
+(package-initialize)
+#+END_SRC
+
+*** Use-package
+		use-package is a macro to install and configure packages;
+
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'use-package)
+	(progn
+		(package-refresh-contents)
+		(package-install 'use-package)))
+
+(require 'use-package)
+#+END_SRC
+
+*** Bind-key
+		bind-key is a macro comes with use-package:
+
+#+BEGIN_SRC emacs-lisp
+(require 'bind-key)
+#+END_SRC
+
+*** Ensure Packages
+		install packages if not in the system.
+
+#+BEGIN_SRC emacs-lisp
+(setq use-package-always-ensure t)
+#+END_SRC
+
+*** Personal Informations
+		editor user informations:
+
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Tareif Al-Zamil"
+			user-mail-address "root@tareifz.me")
+#+END_SRC
+
+** General Settings
+*** Confirmation
+		Ask "y" or "n" instead of "yes" or "no":
+
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+*** Highlight Parentheses
+		Highlight corresponding parentheses when cursor is on one:
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode t)
+#+END_SRC
+
+*** Highlight Tabulations
+
+#+BEGIN_SRC emacs-lisp
+(setq-default highlight-tabs t)
+#+END_SRC
+
+*** Show Trailing Whitespaces
+
+#+BEGIN_SRC emacs-lisp
+(setq-default show-trailing-whitespace t)
+#+END_SRC
+
+*** Remove Useless Whitespaces
+		Remove useless whitespace before saving a file:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook (lambda() (delete-trailing-whitespace)))
+#+END_SRC
+
+*** Skip Splash Screen
+
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-splash-screen t
+			initial-scratch-message nil
+			initial-major-mode 'org-mode)
+#+END_SRC
+
+*** Show Empty Line Markers
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(setq-default indicate-empty-lines t)
+(when (not indicate-empty-lines)
+(toggle-indicate-empty-lines))
+#+END_SRC
+
+*** Make Ibuffer Default
+
+#+BEGIN_SRC emacs-lisp
+(defalias 'list-buffers 'ibuffer)
+#+END_SRC
+
+*** Desktop Mode
+		Save/restore opened files and windows configurations:
+
+#+BEGIN_SRC emacs-lisp
+(desktop-save-mode 1)
+#+END_SRC
+
+*** Delete Selection
+		Make typing delete/overwrites selected text:
+
+#+BEGIN_SRC emacs-lisp
+(delete-selection-mode 1)
+#+END_SRC
+
+*** Highlight Current Line
+
+#+BEGIN_SRC emacs-lisp
+(global-hl-line-mode 1)
+#+END_SRC
+
+*** Refreash File
+		When a file is updated outside emacs, make it update if it's already opened in emacs:
+
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode 1)
+#+END_SRC
+
+*** Prettify Symbols
+		Make some word or string show as pretty Unicode symbols.
+
+#+BEGIN_SRC emacs-lisp
+(defun my-prettify-symbols-list ()
+	"Make some word or string show as pretty Unicode symbols."
+	(setq prettify-symbols-alist
+				'(
+					("lambda" . 955) ;; λ
+					("->" . 8594)    ;; →
+					("=>" . 8658)    ;; ⇒
+					("<=" . 8804)    ;; ≤
+					(">=" . 8805)    ;; ≥
+					("!=" . 8800)    ;; ≠
+					("===" . 8801)   ;; ≡
+					("!==" . 8802)   ;; ≢
+					)))
+
+(add-hook 'prog-mode-hook 'my-prettify-symbols-list)
+
+;; display “lambda” as “λ”
+(global-prettify-symbols-mode 1)
+#+END_SRC
+
+*** Indentation
+**** Spaces or Tabs
+		 Indent using tabs:
+
+#+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode nil)
+#+END_SRC
+
+**** Tab Width
+		 Width of two spaces:
+
+#+BEGIN_SRC emacs-lisp
+(setq-default tab-width 2)
+(setq-default default-tab-width 2)
+#+END_SRC
+
+**** Javascript Indentation Size
+		 Two spaces:
+
+#+BEGIN_SRC emacs-lisp
+(setq-default js-indent-level 2)
+#+END_SRC
+
+*** TODO

@@ -300,7 +300,7 @@
 (bind-key* "C-k" 'tareifz-kill-line)
 ;; ################ Tabs Setup ################ ;;
 ;; Indent using 2 spaces tab
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq-default default-tab-width 2)
 
@@ -312,8 +312,7 @@
 	(interactive)
 	(insert "\t"))
 
-
-(global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
+;; (global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
 ;; make tab key call indent command or insert tab character, depending on cursor position
 (setq-default tab-always-indent nil)
 ;; ############## Ido Mode Setup ############## ;;
