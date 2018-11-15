@@ -258,8 +258,89 @@ depending on cursor position:
 #+END_SRC
 
 *** Global Variables
-    Disable Menu Bar:
+    Disable menu bar:
 
 #+BEGIN_SRC emacs-lisp
 (menu-bar-mode -1)
 #+END_SRC
+
+    Disable tool bar:
+
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode -1)
+#+END_SRC
+
+    Disable scroll bar:
+
+#+BEGIN_SRC emacs-lisp
+(toggle-scroll-bar -1)
+#+END_SRC
+
+    Display line number:
+
+#+BEGIN_SRC emacs-lisp
+(global-linum-mode t)
+(setq-default linum-format " %d ")
+#+END_SRC
+
+    Every time bookmark is changed, automatically save it:
+
+#+BEGIN_SRC emacs-lisp
+(setq bookmark-save-flag 1)
+#+END_SRC
+
+*** Font Settings
+    General settings:
+
+#+BEGIN_SRC emacs-lisp
+;; (set-frame-font "Ubuntu Mono")
+;; (set-frame-font "More Perfect DOS VGA")
+;; (set-frame-font "Unifont")
+;; (set-frame-font "Terminus:antialias=none")
+;; (set-face-attribute 'default nil :height 120)
+;; (set-frame-font "Monaco")
+(set-frame-font "Hack")
+(set-face-attribute 'default nil :height 120)
+#+END_SRC
+
+    For Arch-Linux:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(set-frame-font "xos4 Terminus:antialias=none")
+(set-face-attribute 'default nil :height 120)
+#+END_SRC
+
+*** Custom Settings File
+    Keep auto-generated settings in seperate file:
+
+#+BEGIN_SRC emacs-lisp
+(setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
+(load-file custom-file)
+#+END_SRC
+** Functions
+
+#+BEGIN_SRC emacs-lisp
+(defun tareifz/kill-line ()
+  "Killing current line with the new line character, and put the cursor at the beginning of the line."
+  (interactive)
+  (let (line-begin line-end)
+    (setq line-begin (line-beginning-position))
+    (setq line-end (if (= (point-max) (line-end-position))
+                       (progn
+                         (line-end-position))
+                     (progn
+                       (forward-line 1)
+                       (line-beginning-position))))
+    (kill-region line-begin line-end)
+    (beginning-of-line))
+  )
+#+END_SRC
+** Key Bindings
+   Override [C-k] (kill-to-end-of-line).
+the bind-key* (with star) will override key bindings in all minor modes:
+
+#+BEGIN_SRC emacs-lisp
+(bind-key* "C-k" 'tareifz/kill-line)
+#+END_SRC
+** Packages
+*** TODO
