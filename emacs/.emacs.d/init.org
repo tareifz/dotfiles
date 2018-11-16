@@ -320,6 +320,15 @@ depending on cursor position:
 ** Functions
 
 #+BEGIN_SRC emacs-lisp
+(defun tareifz/load-only-theme ()
+  "Disable all themes and then load a single theme interactively."
+  (interactive)
+  (while custom-enabled-themes
+    (disable-theme (car custom-enabled-themes)))
+  (call-interactively 'load-theme))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (defun tareifz/kill-line ()
   "Killing current line with the new line character, and put the cursor at the beginning of the line."
   (interactive)
@@ -343,4 +352,167 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (bind-key* "C-k" 'tareifz/kill-line)
 #+END_SRC
 ** Packages
+*** [org-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package org)
+#+END_SRC
+
+*** [try]
+    This package let you try packages without installing
+
+#+BEGIN_SRC emacs-lisp
+(use-package try)
+#+END_SRC
+
+*** [smartparens]
+    Auto-close parens:
+
+#+BEGIN_SRC emacs-lisp
+(use-package smartparens
+  :config
+  (smartparens-global-mode t))
+#+END_SRC
+
+*** [rainbow-mode]
+    Represent colors with the color they represent as background:
+
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-mode))
+#+END_SRC
+
+*** [rainbow-delimiters]
+    Rainbow parentheses:
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :requires rainbow-mode
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+
+*** [aggressive-indent]
+    Minor mode that keeps your code always indented:
+
+#+BEGIN_SRC emacs-lisp
+(use-package aggressive-indent
+  :config
+  (global-aggressive-indent-mode t))
+#+END_SRC
+
+*** [beacon]
+    Shows the cursor position:
+
+#+BEGIN_SRC emacs-lisp
+(use-package beacon
+  :custom
+  (beacon-mode t "turn on beacon mode.")
+  (beacon-blink-when-focused t "let the cursor blink when focused."))
+#+END_SRC
+
+*** [smex]
+    Commands bar auto complete and suggestion:
+
+#+BEGIN_SRC emacs-lisp
+(use-package smex
+  :bind (("M-x" . smex))
+  :config (smex-initialize))
+#+END_SRC
+
+*** [company]
+    Auto-complete engine:
+
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :config
+  (global-company-mode t))
+#+END_SRC
+
+*** [rust-mode]
+    Rust-lang support:
+
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode
+  :custom
+  (company-tooltip-align-annotations t))
+#+END_SRC
+
+*** [racer]
+    provide rust code completion with Company:
+
+#+BEGIN_SRC emacs-lisp
+;; rustup component add rust-src
+;; cargo install racer
+(use-package racer
+  :requires rust-mode
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+#+END_SRC
+
+*** [multiple-cursors]
+
+#+BEGIN_SRC emacs-lisp
+(use-package multiple-cursors
+  :config
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+#+END_SRC
+
+*** [switch-window]
+    Will number the window when you try to switch:
+
+#+BEGIN_SRC emacs-lisp
+(use-package switch-window
+  :config
+  (global-set-key (kbd "C-x o") 'switch-window))
+#+END_SRC
+
+*** [web-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+#+END_SRC
+
+*** [js2-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+#+END_SRC
+
+*** [electric-operator]
+
+#+BEGIN_SRC emacs-lisp
+(use-package electric-operator
+  :config
+  (add-hook 'rust-mode-hook #'electric-operator-mode)
+  (add-hook 'javascript-mode-hook #'electric-operator-mode)
+  (electric-operator-add-rules-for-mode 'rust-mode
+                                        (cons "->" " -> ")))
+#+END_SRC
+
+*** [impatient-mode]
+    Start a server and auto-refresh the page when change happens:
+
+#+BEGIN_SRC emacs-lisp
+;; M-x httpd-start
+;; M-x impatient-mode
+;; http://localhost:8080/imp/
+(use-package impatient-mode)
+#+END_SRC
+
 *** TODO
