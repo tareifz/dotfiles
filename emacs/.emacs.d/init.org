@@ -351,6 +351,24 @@ the bind-key* (with star) will override key bindings in all minor modes:
 #+BEGIN_SRC emacs-lisp
 (bind-key* "C-k" 'tareifz/kill-line)
 #+END_SRC
+** Themes
+*** Custom User Themes
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+#+END_SRC
+
+*** Theme packages
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package sourcerer-theme)
+;; (use-package dracula-theme)
+;; (use-package atom-one-dark-theme)
+(use-package hydandata-light-theme)
+#+END_SRC
+
 ** Packages
 *** [org-mode]
 
@@ -403,7 +421,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 #+END_SRC
 
 *** [beacon]
-    Shows the cursor position:
+    Shows cursor position:
 
 #+BEGIN_SRC emacs-lisp
 (use-package beacon
@@ -515,4 +533,158 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (use-package impatient-mode)
 #+END_SRC
 
-*** TODO
+*** [all-the-icons]
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons)
+;; M-x all-the-icons-install-fonts
+#+END_SRC
+
+*** [neotree]
+
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :bind(("<f5>" . neotree-toggle))
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq-default neo-show-hidden-files t))
+#+END_SRC
+
+*** [symon]
+    Show system resources:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(use-package symon
+  :config
+  (symon-mode 1))
+#+END_SRC
+
+*** [telephone-line]
+    Change status bar:
+
+#+BEGIN_SRC emacs-lisp
+(use-package telephone-line
+  :config
+  (telephone-line-mode 1))
+#+END_SRC
+
+*** [which-key]
+    Show possible completion for unfinished command:
+
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :config
+  (which-key-mode)
+  (which-key-setup-side-window-right-bottom))
+#+END_SRC
+
+*** [expand-region]
+    Expand selection region outward:
+
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+#+END_SRC
+
+*** [flycheck]
+    Linting engine:
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :init (global-flycheck-mode)
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+#+END_SRC
+
+*** [flycheck-inline]
+    Display linting result inline:
+
+#+BEGIN_SRC emacs-lisp
+;; annoying with long error messages (rustc errors)
+(use-package flycheck-inline
+  :requires (flycheck)
+  :config	(flycheck-inline-mode 1))
+#+END_SRC
+
+*** [flycheck-rust]
+    Rust frontend for flycheck:
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-rust
+  :requires (flycheck)
+  :hook (rust-mode . flycheck-rust-setup))
+#+END_SRC
+
+*** [geiser]
+    Scheme tools for Emacs:
+#+BEGIN_SRC emacs-lisp
+;; C-c C-b === eval-buffer
+;; C-c C-c === eval-definition.
+(use-package geiser
+  :config
+  (setq geiser-active-implementations '(guile)))
+#+END_SRC
+
+*** [flymd]
+    Live markdown preview:
+
+#+BEGIN_SRC emacs-lisp
+(use-package flymd
+  :config
+  (setq-default flymd-output-directory "~/.flymd/"))
+#+END_SRC
+
+*** [helm]
+    Search, completion ...:
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :init
+  (setq helm-mode-fuzzy-match        t
+        helm-buffers-fuzzy-matching  t
+        helm-recentf-fuzzy-match     t
+        helm-M-x-fuzzy-match         t
+        helm-full-frame              nil
+        helm-ff-guess-ffap-urls      nil
+        helm-ff-guess-ffap-filenames nil
+        helm-highlight-matches-around-point-max-lines 0)
+  :bind (("M-x" . helm-M-x)
+         ("C-x b" . helm-buffers-list)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-d" . helm-browse-project)
+         ("C-c f" . helm-recentf)
+         ("M-y" . helm-show-kill-ring)
+         :map helm-map
+         ("<tab>" . helm-execute-persistent-action)	;; make tab complete action
+         ("C-i" . helm-execute-persistent-action)
+         ("C-z" . helm-select-action)
+         ))
+
+;;(global-set-key (kbd "<f5> s")                       'helm-find)
+#+END_SRC
+
+*** [helm-ls-git]
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-ls-git
+  :requires (helm))
+#+END_SRC
+
+*** [emmet-mode]
+    Expand expression to HTML elements:
+
+#+BEGIN_SRC emacs-lisp
+;; [C-j] to expand
+(use-package emmet-mode
+  :hook (web-mode . emmet-mode))
+#+END_SRC
+
+*** [diff-hl]
+    Highlight git changes in buffer:
+
+#+BEGIN_SRC emacs-lisp
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode))
+#+END_SRC

@@ -184,8 +184,8 @@
   :config
   (setq-default flymd-output-directory "~/.flymd/"))
 
-;; ;; [helm]
-;; ;; Search, completion ...
+;; [helm]
+;; Search, completion ...
 (use-package helm
   :init
   (setq helm-mode-fuzzy-match        t
