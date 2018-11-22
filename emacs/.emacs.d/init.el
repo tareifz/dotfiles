@@ -20,6 +20,60 @@
 (setq user-full-name "Tareif Al-Zamil"
       user-mail-address "root@tareifz.me")
 
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
+;; save & shutdown when we get an "end of session" signal on dbus
+(require 'dbus)
+
+(defun my-register-signals (client-path)
+  "Register for the 'QueryEndSession' and 'EndSession' signals from
+Gnome SessionManager.
+
+When we receive 'QueryEndSession', we just respond with
+'EndSessionResponse(true, \"\")'.  When we receive 'EndSession', we
+append this EndSessionResponse to kill-emacs-hook, and then call
+kill-emacs.  This way, we can shut down the Emacs daemon cleanly
+before we send our 'ok' to the SessionManager."
+  (setq my-gnome-client-path client-path)
+  (let ( (end-session-response (lambda (&optional arg)
+                                 (dbus-call-method-asynchronously
+                                  :session "org.gnome.SessionManager" my-gnome-client-path
+                                  "org.gnome.SessionManager.ClientPrivate" "EndSessionResponse" nil
+                                  t "") ) ) )
+         (dbus-register-signal
+          :session "org.gnome.SessionManager" my-gnome-client-path
+          "org.gnome.SessionManager.ClientPrivate" "QueryEndSession"
+          end-session-response )
+         (dbus-register-signal
+          :session "org.gnome.SessionManager" my-gnome-client-path
+          "org.gnome.SessionManager.ClientPrivate" "EndSession"
+          `(lambda (arg)
+             (add-hook 'kill-emacs-hook ,end-session-response t)
+             (kill-emacs) ) ) ) )
+
+;; DESKTOP_AUTOSTART_ID is set by the Gnome desktop manager when emacs
+;; is autostarted.  We can use it to register as a client with gnome
+;; SessionManager.
+(dbus-call-method-asynchronously
+ :session "org.gnome.SessionManager"
+ "/org/gnome/SessionManager"
+ "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
+ "Emacs server" (getenv "DESKTOP_AUTOSTART_ID"))
+
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+                  (with-selected-frame frame
+                                       (progn (menu-bar-mode -1)
+                                       (tool-bar-mode -1)
+                                       (toggle-scroll-bar -1)
+                                       (global-linum-mode t)
+                                       (setq-default linum-format " %d ")))))
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (show-paren-mode t)
@@ -36,8 +90,6 @@
       initial-major-mode 'org-mode)
 
 (defalias 'list-buffers 'ibuffer)
-
-(desktop-save-mode 1)
 
 (delete-selection-mode 1)
 
@@ -70,6 +122,8 @@
 (setq-default default-tab-width 2)
 
 (setq-default js-indent-level 2)
+
+(setq-default tab-always-indent nil)
 
 (progn
   ;; make buffer switch command do suggestions, also for find-file command
@@ -159,10 +213,6 @@
 
 (bind-key* "C-k" 'tareifz/kill-line)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
-;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
@@ -171,14 +221,6 @@
 (use-package org)
 
 (use-package try)
-
-(use-package smartparens
-  :config
-  (smartparens-global-mode t))
-
-(use-package rainbow-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-mode))
 
 (use-package rainbow-delimiters
   :requires rainbow-mode
@@ -189,80 +231,13 @@
   :config
   (global-aggressive-indent-mode t))
 
-(use-package beacon
-  :custom
-  (beacon-mode t "turn on beacon mode.")
-  (beacon-blink-when-focused t "let the cursor blink when focused."))
-
 (use-package smex
   :bind (("M-x" . smex))
   :config (smex-initialize))
 
-(use-package company
-  :config
-  (global-company-mode t))
-
-(use-package rust-mode
-  :custom
-  (company-tooltip-align-annotations t))
-
-;; rustup component add rust-src
-;; cargo install racer
-(use-package racer
-  :requires rust-mode
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
-
-(use-package multiple-cursors
-  :config
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
-
 (use-package switch-window
   :config
   (global-set-key (kbd "C-x o") 'switch-window))
-
-(use-package web-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-
-(use-package js2-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-
-(use-package electric-operator
-  :config
-  (add-hook 'rust-mode-hook #'electric-operator-mode)
-  (add-hook 'javascript-mode-hook #'electric-operator-mode)
-  (electric-operator-add-rules-for-mode 'rust-mode
-                                        (cons "->" " -> ")))
-
-;; M-x httpd-start
-;; M-x impatient-mode
-;; http://localhost:8080/imp/
-(use-package impatient-mode)
-
-(use-package all-the-icons)
-;; M-x all-the-icons-install-fonts
-
-(use-package neotree
-  :bind(("<f5>" . neotree-toggle))
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq-default neo-show-hidden-files t))
-
-(use-package telephone-line
-  :config
-  (telephone-line-mode 1))
 
 (use-package which-key
   :config
@@ -271,61 +246,6 @@
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
-
-(use-package flycheck
-  :init (global-flycheck-mode)
-  :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
-
-;; annoying with long error messages (rustc errors)
-(use-package flycheck-inline
-  :requires (flycheck)
-  :config (flycheck-inline-mode 1))
-
-(use-package flycheck-rust
-  :requires (flycheck)
-  :hook (rust-mode . flycheck-rust-setup))
-
-;; C-c C-b === eval-buffer
-;; C-c C-c === eval-definition.
-(use-package geiser
-  :config
-  (setq geiser-active-implementations '(guile)))
-
-(use-package flymd
-  :config
-  (setq-default flymd-output-directory "~/.flymd/"))
-
-(use-package helm
-  :init
-  (setq helm-mode-fuzzy-match        t
-        helm-buffers-fuzzy-matching  t
-        helm-recentf-fuzzy-match     t
-        helm-M-x-fuzzy-match         t
-        helm-full-frame              nil
-        helm-ff-guess-ffap-urls      nil
-        helm-ff-guess-ffap-filenames nil
-        helm-highlight-matches-around-point-max-lines 0)
-  :bind (("M-x" . helm-M-x)
-         ("C-x b" . helm-buffers-list)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-d" . helm-browse-project)
-         ("C-c f" . helm-recentf)
-         ("M-y" . helm-show-kill-ring)
-         :map helm-map
-         ("<tab>" . helm-execute-persistent-action) ;; make tab complete action
-         ("C-i" . helm-execute-persistent-action)
-         ("C-z" . helm-select-action)
-         ))
-
-;;(global-set-key (kbd "<f5> s")                       'helm-find)
-
-(use-package helm-ls-git
-  :requires (helm))
-
-;; [C-j] to expand
-(use-package emmet-mode
-  :hook (web-mode . emmet-mode))
 
 (use-package diff-hl
   :config

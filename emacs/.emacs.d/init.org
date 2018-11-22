@@ -29,14 +29,12 @@
 (require 'use-package)
 #+END_SRC
 
-*** Bind-key
     bind-key is a macro comes with use-package:
 
 #+BEGIN_SRC emacs-lisp
 (require 'bind-key)
 #+END_SRC
 
-*** Ensure Packages
     install packages if not in the system.
 
 #+BEGIN_SRC emacs-lisp
@@ -49,6 +47,71 @@
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Tareif Al-Zamil"
       user-mail-address "root@tareifz.me")
+#+END_SRC
+
+*** Emacs Daemon
+    Stopping the emacs daemon:
+
+#+BEGIN_SRC emacs-lisp
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+#+END_SRC
+
+    Make emacs register as a client with the GNOME session manager, and shutdown gracefully when the session ends:
+
+#+BEGIN_SRC emacs-lisp
+;; save & shutdown when we get an "end of session" signal on dbus
+(require 'dbus)
+
+(defun my-register-signals (client-path)
+  "Register for the 'QueryEndSession' and 'EndSession' signals from
+Gnome SessionManager.
+
+When we receive 'QueryEndSession', we just respond with
+'EndSessionResponse(true, \"\")'.  When we receive 'EndSession', we
+append this EndSessionResponse to kill-emacs-hook, and then call
+kill-emacs.  This way, we can shut down the Emacs daemon cleanly
+before we send our 'ok' to the SessionManager."
+  (setq my-gnome-client-path client-path)
+  (let ( (end-session-response (lambda (&optional arg)
+                                 (dbus-call-method-asynchronously
+                                  :session "org.gnome.SessionManager" my-gnome-client-path
+                                  "org.gnome.SessionManager.ClientPrivate" "EndSessionResponse" nil
+                                  t "") ) ) )
+         (dbus-register-signal
+          :session "org.gnome.SessionManager" my-gnome-client-path
+          "org.gnome.SessionManager.ClientPrivate" "QueryEndSession"
+          end-session-response )
+         (dbus-register-signal
+          :session "org.gnome.SessionManager" my-gnome-client-path
+          "org.gnome.SessionManager.ClientPrivate" "EndSession"
+          `(lambda (arg)
+             (add-hook 'kill-emacs-hook ,end-session-response t)
+             (kill-emacs) ) ) ) )
+
+;; DESKTOP_AUTOSTART_ID is set by the Gnome desktop manager when emacs
+;; is autostarted.  We can use it to register as a client with gnome
+;; SessionManager.
+(dbus-call-method-asynchronously
+ :session "org.gnome.SessionManager"
+ "/org/gnome/SessionManager"
+ "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
+ "Emacs server" (getenv "DESKTOP_AUTOSTART_ID"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+                  (with-selected-frame frame
+                                       (progn (menu-bar-mode -1)
+                                       (tool-bar-mode -1)
+                                       (toggle-scroll-bar -1)
+                                       (global-linum-mode t)
+                                       (setq-default linum-format " %d ")))))
 #+END_SRC
 
 ** General Settings
@@ -106,13 +169,6 @@
 
 #+BEGIN_SRC emacs-lisp
 (defalias 'list-buffers 'ibuffer)
-#+END_SRC
-
-*** Desktop Mode
-    Save/restore opened files and windows configurations:
-
-#+BEGIN_SRC emacs-lisp
-(desktop-save-mode 1)
 #+END_SRC
 
 *** Delete Selection
@@ -181,18 +237,6 @@
 #+BEGIN_SRC emacs-lisp
 (setq-default js-indent-level 2)
 #+END_SRC
-
-**** Insert Literal Tab
-     Insert literal tab instead of invoking indentation command:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(defun my-insert-tab-char ()
-  "Insert a tab char. (ASCII 9, \t)"
-  (interactive)
-  (insert "\t"))
-
-(global-set-key (kbd "<tab>") 'my-insert-tab-char) ; same as Ctrl+i
-#+ENS_SRC
 
 **** Indent or Insert Tab
      Make tab key call indent command or insert tab character,
@@ -354,7 +398,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 ** Themes
 *** Custom User Themes
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
@@ -386,7 +430,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [smartparens]
     Auto-close parens:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package smartparens
   :config
   (smartparens-global-mode t))
@@ -395,7 +439,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [rainbow-mode]
     Represent colors with the color they represent as background:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package rainbow-mode
   :config
   (add-hook 'prog-mode-hook #'rainbow-mode))
@@ -423,7 +467,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [beacon]
     Shows cursor position:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package beacon
   :custom
   (beacon-mode t "turn on beacon mode.")
@@ -442,7 +486,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [company]
     Auto-complete engine:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package company
   :config
   (global-company-mode t))
@@ -451,7 +495,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [rust-mode]
     Rust-lang support:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package rust-mode
   :custom
   (company-tooltip-align-annotations t))
@@ -460,7 +504,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [racer]
     provide rust code completion with Company:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; rustup component add rust-src
 ;; cargo install racer
 (use-package racer
@@ -472,7 +516,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [multiple-cursors]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package multiple-cursors
   :config
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -491,7 +535,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [web-mode]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -506,7 +550,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [js2-mode]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package js2-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
@@ -514,7 +558,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [electric-operator]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package electric-operator
   :config
   (add-hook 'rust-mode-hook #'electric-operator-mode)
@@ -526,46 +570,11 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [impatient-mode]
     Start a server and auto-refresh the page when change happens:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; M-x httpd-start
 ;; M-x impatient-mode
 ;; http://localhost:8080/imp/
 (use-package impatient-mode)
-#+END_SRC
-
-*** [all-the-icons]
-
-#+BEGIN_SRC emacs-lisp
-(use-package all-the-icons)
-;; M-x all-the-icons-install-fonts
-#+END_SRC
-
-*** [neotree]
-
-#+BEGIN_SRC emacs-lisp
-(use-package neotree
-  :bind(("<f5>" . neotree-toggle))
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq-default neo-show-hidden-files t))
-#+END_SRC
-
-*** [symon]
-    Show system resources:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package symon
-  :config
-  (symon-mode 1))
-#+END_SRC
-
-*** [telephone-line]
-    Change status bar:
-
-#+BEGIN_SRC emacs-lisp
-(use-package telephone-line
-  :config
-  (telephone-line-mode 1))
 #+END_SRC
 
 *** [which-key]
@@ -589,27 +598,17 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [flycheck]
     Linting engine:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package flycheck
   :init (global-flycheck-mode)
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 #+END_SRC
 
-*** [flycheck-inline]
-    Display linting result inline:
-
-#+BEGIN_SRC emacs-lisp
-;; annoying with long error messages (rustc errors)
-(use-package flycheck-inline
-  :requires (flycheck)
-  :config	(flycheck-inline-mode 1))
-#+END_SRC
-
 *** [flycheck-rust]
     Rust frontend for flycheck:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package flycheck-rust
   :requires (flycheck)
   :hook (rust-mode . flycheck-rust-setup))
@@ -617,7 +616,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [geiser]
     Scheme tools for Emacs:
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; C-c C-b === eval-buffer
 ;; C-c C-c === eval-definition.
 (use-package geiser
@@ -628,52 +627,16 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [flymd]
     Live markdown preview:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package flymd
   :config
   (setq-default flymd-output-directory "~/.flymd/"))
 #+END_SRC
 
-*** [helm]
-    Search, completion ...:
-
-#+BEGIN_SRC emacs-lisp
-(use-package helm
-  :init
-  (setq helm-mode-fuzzy-match        t
-        helm-buffers-fuzzy-matching  t
-        helm-recentf-fuzzy-match     t
-        helm-M-x-fuzzy-match         t
-        helm-full-frame              nil
-        helm-ff-guess-ffap-urls      nil
-        helm-ff-guess-ffap-filenames nil
-        helm-highlight-matches-around-point-max-lines 0)
-  :bind (("M-x" . helm-M-x)
-         ("C-x b" . helm-buffers-list)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-d" . helm-browse-project)
-         ("C-c f" . helm-recentf)
-         ("M-y" . helm-show-kill-ring)
-         :map helm-map
-         ("<tab>" . helm-execute-persistent-action)	;; make tab complete action
-         ("C-i" . helm-execute-persistent-action)
-         ("C-z" . helm-select-action)
-         ))
-
-;;(global-set-key (kbd "<f5> s")                       'helm-find)
-#+END_SRC
-
-*** [helm-ls-git]
-
-#+BEGIN_SRC emacs-lisp
-(use-package helm-ls-git
-  :requires (helm))
-#+END_SRC
-
 *** [emmet-mode]
     Expand expression to HTML elements:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; [C-j] to expand
 (use-package emmet-mode
   :hook (web-mode . emmet-mode))
@@ -687,4 +650,13 @@ the bind-key* (with star) will override key bindings in all minor modes:
   :config
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
+#+END_SRC
+*** [projectile]
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
+  (projectile-mode +1))
 #+END_SRC
