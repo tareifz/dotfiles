@@ -78,6 +78,8 @@ before we send our 'ok' to the SessionManager."
 
 (show-paren-mode t)
 
+(electric-pair-mode t)
+
 (setq-default highlight-tabs t)
 
 (setq-default show-trailing-whitespace t)
@@ -125,35 +127,25 @@ before we send our 'ok' to the SessionManager."
 
 (setq-default tab-always-indent nil)
 
-(progn
-  ;; make buffer switch command do suggestions, also for find-file command
-  (require 'ido)
-  (ido-mode 1)
+(ido-mode 1)
+(ido-everywhere 1)
 
-  ;; show choices vertically
-  (if (version< emacs-version "25")
-      (progn
-        (make-local-variable 'ido-separator)
-        (setq ido-decorations "\n"))
-    (progn
-      (make-local-variable 'ido-decorations)
-      (setf (nth 2 ido-decorations) "\n")))
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1))
 
-  ;; show any name that has the chars you typed
-  (setq ido-enable-flex-matching t)
-  ;; use current pane for newly opened file
-  (setq ido-default-file-method 'selected-window)
-  ;; use current pane for newly switched buffer
-  (setq ido-default-buffer-method 'selected-window)
-  ;; stop ido from suggesting when naming new file
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode 1)
+  :custom
+  (ido-vertical-define-keys 'C-n-and-C-p-only))
 
-;; big minibuffer height, for ido to show choices vertically
-(setq max-mini-window-height 0.5)
-
-(require 'ido)
-;; stop ido suggestion when doing a save-as
-(define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  :custom
+  (ido-enable-flex-matching t)
+  (ido-use-faces nil))
 
 (setq make-backup-files nil)
 (setq backup-inhibited t)
@@ -224,20 +216,58 @@ before we send our 'ok' to the SessionManager."
 
 (use-package rainbow-delimiters
   :requires rainbow-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 (use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode t))
+  :hook
+  (prog-mode . aggressive-indent-mode))
 
-(use-package smex
-  :bind (("M-x" . smex))
-  :config (smex-initialize))
+(use-package company
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-idle-delay 0.1)
+  (company-tooltip-align-annotations t))
+
+(use-package rust-mode)
+
+;; rustup component add rust-src
+;; cargo install racer
+(use-package racer
+  :requires rust-mode
+  :hook
+  ((rust-mode . racer-mode)
+   (racer-mode . eldoc-mode)))
+
+(use-package multiple-cursors
+  :bind
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this))
 
 (use-package switch-window
+  :bind
+  ("C-x o" . switch-window))
+
+(use-package web-mode
   :config
-  (global-set-key (kbd "C-x o") 'switch-window))
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+(use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+;; M-x httpd-start
+;; M-x impatient-mode
+;; http://localhost:8080/imp/
+(use-package impatient-mode)
 
 (use-package which-key
   :config
@@ -246,6 +276,23 @@ before we send our 'ok' to the SessionManager."
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
+
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode)
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+
+(use-package flycheck-rust
+  :requires (flycheck rust-mode)
+  :hook (rust-mode . flycheck-rust-setup))
+
+(use-package flymd
+  :custom
+  (flymd-output-directory "~/.flymd/"))
+
+;; [C-j] to expand
+(use-package emmet-mode
+  :hook (web-mode . emmet-mode))
 
 (use-package diff-hl
   :config

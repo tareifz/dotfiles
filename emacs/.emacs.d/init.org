@@ -129,6 +129,13 @@ before we send our 'ok' to the SessionManager."
 (show-paren-mode t)
 #+END_SRC
 
+*** Auto Close Pairs
+    Electric pair mode will insert the closing pair automatically:
+
+#+BEGIN_SRC emacs-lisp
+(electric-pair-mode t)
+#+END_SRC
+
 *** Highlight Tabulations
 
 #+BEGIN_SRC emacs-lisp
@@ -247,37 +254,36 @@ depending on cursor position:
 #+END_SRC
 
 *** Ido Mode
+    Enable ido-mode and ido-everywhere:
 
 #+BEGIN_SRC emacs-lisp
-(progn
-  ;; make buffer switch command do suggestions, also for find-file command
-  (require 'ido)
-  (ido-mode 1)
+(ido-mode 1)
+(ido-everywhere 1)
+#+END_SRC
 
-  ;; show choices vertically
-  (if (version< emacs-version "25")
-      (progn
-        (make-local-variable 'ido-separator)
-        (setq ido-decorations "\n"))
-    (progn
-      (make-local-variable 'ido-decorations)
-      (setf (nth 2 ido-decorations) "\n")))
+#+BEGIN_SRC emacs-lisp
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1))
+#+END_SRC
 
-  ;; show any name that has the chars you typed
-  (setq ido-enable-flex-matching t)
-  ;; use current pane for newly opened file
-  (setq ido-default-file-method 'selected-window)
-  ;; use current pane for newly switched buffer
-  (setq ido-default-buffer-method 'selected-window)
-  ;; stop ido from suggesting when naming new file
-  (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
+    Makes ido-mode display vertically:
 
-;; big minibuffer height, for ido to show choices vertically
-(setq max-mini-window-height 0.5)
+#+BEGIN_SRC emacs-lisp
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode 1)
+  :custom
+  (ido-vertical-define-keys 'C-n-and-C-p-only))
+#+END_SRC
 
-(require 'ido)
-;; stop ido suggestion when doing a save-as
-(define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil)
+#+BEGIN_SRC emacs-lisp
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  :custom
+  (ido-enable-flex-matching t)
+  (ido-use-faces nil))
 #+END_SRC
 
 *** Backup Files
@@ -427,22 +433,13 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (use-package try)
 #+END_SRC
 
-*** [smartparens]
-    Auto-close parens:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package smartparens
-  :config
-  (smartparens-global-mode t))
-#+END_SRC
-
 *** [rainbow-mode]
     Represent colors with the color they represent as background:
 
 #+BEGIN_SRC emacs-lisp :tangle no
 (use-package rainbow-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-mode))
+  :hook
+  (prog-mode . rainbow-mode))
 #+END_SRC
 
 *** [rainbow-delimiters]
@@ -451,8 +448,8 @@ the bind-key* (with star) will override key bindings in all minor modes:
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
   :requires rainbow-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 #+END_SRC
 
 *** [aggressive-indent]
@@ -460,68 +457,49 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 #+BEGIN_SRC emacs-lisp
 (use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode t))
-#+END_SRC
-
-*** [beacon]
-    Shows cursor position:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package beacon
-  :custom
-  (beacon-mode t "turn on beacon mode.")
-  (beacon-blink-when-focused t "let the cursor blink when focused."))
-#+END_SRC
-
-*** [smex]
-    Commands bar auto complete and suggestion:
-
-#+BEGIN_SRC emacs-lisp
-(use-package smex
-  :bind (("M-x" . smex))
-  :config (smex-initialize))
+  :hook
+  (prog-mode . aggressive-indent-mode))
 #+END_SRC
 
 *** [company]
     Auto-complete engine:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package company
-  :config
-  (global-company-mode t))
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-idle-delay 0.1)
+  (company-tooltip-align-annotations t))
 #+END_SRC
 
 *** [rust-mode]
     Rust-lang support:
 
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package rust-mode
-  :custom
-  (company-tooltip-align-annotations t))
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode)
 #+END_SRC
 
 *** [racer]
-    provide rust code completion with Company:
+    Provide rust code completion with Company:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 ;; rustup component add rust-src
 ;; cargo install racer
 (use-package racer
   :requires rust-mode
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+  :hook
+  ((rust-mode . racer-mode)
+   (racer-mode . eldoc-mode)))
 #+END_SRC
 
 *** [multiple-cursors]
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package multiple-cursors
-  :config
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+  :bind
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this))
 #+END_SRC
 
 *** [switch-window]
@@ -529,13 +507,13 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 #+BEGIN_SRC emacs-lisp
 (use-package switch-window
-  :config
-  (global-set-key (kbd "C-x o") 'switch-window))
+  :bind
+  ("C-x o" . switch-window))
 #+END_SRC
 
 *** [web-mode]
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -550,27 +528,16 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 *** [js2-mode]
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package js2-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 #+END_SRC
 
-*** [electric-operator]
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package electric-operator
-  :config
-  (add-hook 'rust-mode-hook #'electric-operator-mode)
-  (add-hook 'javascript-mode-hook #'electric-operator-mode)
-  (electric-operator-add-rules-for-mode 'rust-mode
-                                        (cons "->" " -> ")))
-#+END_SRC
-
 *** [impatient-mode]
     Start a server and auto-refresh the page when change happens:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 ;; M-x httpd-start
 ;; M-x impatient-mode
 ;; http://localhost:8080/imp/
@@ -598,9 +565,9 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [flycheck]
     Linting engine:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package flycheck
-  :init (global-flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
   :config
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 #+END_SRC
@@ -608,9 +575,9 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [flycheck-rust]
     Rust frontend for flycheck:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package flycheck-rust
-  :requires (flycheck)
+  :requires (flycheck rust-mode)
   :hook (rust-mode . flycheck-rust-setup))
 #+END_SRC
 
@@ -627,16 +594,16 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [flymd]
     Live markdown preview:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package flymd
-  :config
-  (setq-default flymd-output-directory "~/.flymd/"))
+  :custom
+  (flymd-output-directory "~/.flymd/"))
 #+END_SRC
 
 *** [emmet-mode]
     Expand expression to HTML elements:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 ;; [C-j] to expand
 (use-package emmet-mode
   :hook (web-mode . emmet-mode))
