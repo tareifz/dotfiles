@@ -172,11 +172,11 @@ before we send our 'ok' to the SessionManager."
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-;; (set-frame-font "Terminus:antialias=none")
-;; (set-face-attribute 'default nil :height 120)
-;; (set-frame-font "Monaco")
-(set-frame-font "Hack")
+(set-frame-font "Terminus:antialias=none")
 (set-face-attribute 'default nil :height 120)
+;; (set-frame-font "Monaco")
+;; (set-frame-font "Hack")
+;; (set-face-attribute 'default nil :height 120)
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)
@@ -205,14 +205,23 @@ before we send our 'ok' to the SessionManager."
 
 (bind-key* "C-k" 'tareifz/kill-line)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-(use-package hydandata-light-theme)
+;; (use-package hydandata-light-theme)
+(use-package panda-theme)
 
 (use-package org)
 
 (use-package try)
+
+(use-package rainbow-mode
+  :hook
+  (prog-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
   :requires rainbow-mode
