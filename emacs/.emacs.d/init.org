@@ -111,7 +111,9 @@ before we send our 'ok' to the SessionManager."
                                        (tool-bar-mode -1)
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
-                                       (setq-default linum-format " %d ")))))
+                                       (setq-default linum-format " %d ")
+                                       (set-frame-font "Terminus:antialias=none")
+                                       (set-face-attribute 'default nil :height 120)))))
 #+END_SRC
 
 ** General Settings
@@ -416,8 +418,8 @@ the bind-key* (with star) will override key bindings in all minor modes:
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-;; (use-package hydandata-light-theme)
-(use-package panda-theme)
+(use-package hydandata-light-theme)
+;; (use-package panda-theme)
 #+END_SRC
 
 ** Packages

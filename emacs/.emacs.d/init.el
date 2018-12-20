@@ -72,7 +72,9 @@ before we send our 'ok' to the SessionManager."
                                        (tool-bar-mode -1)
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
-                                       (setq-default linum-format " %d ")))))
+                                       (setq-default linum-format " %d ")
+                                       (set-frame-font "Terminus:antialias=none")
+                                       (set-face-attribute 'default nil :height 120)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -212,8 +214,8 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-;; (use-package hydandata-light-theme)
-(use-package panda-theme)
+(use-package hydandata-light-theme)
+;; (use-package panda-theme)
 
 (use-package org)
 
