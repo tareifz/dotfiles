@@ -1,4 +1,3 @@
-
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -73,8 +72,10 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       (set-frame-font "Terminus:antialias=none")
-                                       (set-face-attribute 'default nil :height 120)))))
+                                       ;;(set-frame-font "Terminus:antialias=none")
+                                       ;;(set-face-attribute 'default nil :height 120)
+                                       (set-frame-font "Hack")
+                                       (set-face-attribute 'default nil :height 160)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -174,11 +175,11 @@ before we send our 'ok' to the SessionManager."
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-(set-frame-font "Terminus:antialias=none")
-(set-face-attribute 'default nil :height 120)
-;; (set-frame-font "Monaco")
-;; (set-frame-font "Hack")
+;; (set-frame-font "Terminus:antialias=none")
 ;; (set-face-attribute 'default nil :height 120)
+;; (set-frame-font "Monaco")
+(set-frame-font "Hack")
+(set-face-attribute 'default nil :height 160)
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)
@@ -214,7 +215,7 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
-(use-package hydandata-light-theme)
+;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
 
 (use-package org)
