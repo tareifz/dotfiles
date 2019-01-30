@@ -17,3 +17,4 @@ sudo apt install libreadline-dev -y # for using Readline
 
 
 #### npm install -g eslint
+#### npm install -g prettier-js
