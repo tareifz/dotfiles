@@ -316,3 +316,17 @@ before we send our 'ok' to the SessionManager."
   :config
   (setq prettier-js-args '(
     "--trailing-comma" "es5")))
+
+(use-package crystal-mode)
+
+(use-package apib-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode)))
+
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode t))
+
+(use-package indent-guide
+  :config
+  (indent-guide-global-mode))

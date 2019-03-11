@@ -641,3 +641,33 @@ the bind-key* (with star) will override key bindings in all minor modes:
   (setq prettier-js-args '(
     "--trailing-comma" "es5")))
 #+END_SRC
+
+*** [crystal-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package crystal-mode)
+#+END_SRC
+
+*** [API Blueprint Mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package apib-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode)))
+#+END_SRC
+
+*** [eyebrowse-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode t))
+#+END_SRC
+
+*** [indent-guide]
+
+#+BEGIN_SRC emacs-lisp
+(use-package indent-guide
+  :config
+  (indent-guide-global-mode))
+#+END_SRC
