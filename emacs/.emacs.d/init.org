@@ -354,7 +354,7 @@ depending on cursor position:
 ;; (set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
 (set-frame-font "Hack")
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 120)
 #+END_SRC
 
     For Arch-Linux:
@@ -422,6 +422,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 ;; (use-package atom-one-dark-theme)
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
+(use-package hemera-theme)
 #+END_SRC
 
 ** Packages

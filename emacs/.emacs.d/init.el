@@ -179,7 +179,7 @@ before we send our 'ok' to the SessionManager."
 ;; (set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
 (set-frame-font "Hack")
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 120)
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)
@@ -217,6 +217,7 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package atom-one-dark-theme)
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
+(use-package hemera-theme)
 
 (use-package org)
 
