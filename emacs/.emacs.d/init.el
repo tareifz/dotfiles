@@ -331,3 +331,11 @@ before we send our 'ok' to the SessionManager."
 (use-package indent-guide
   :config
   (indent-guide-global-mode))
+
+(use-package all-the-icons)
+
+(use-package neotree
+  :bind
+  ("<f5>" . neotree-toggle)
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))

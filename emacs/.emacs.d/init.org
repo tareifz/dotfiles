@@ -672,3 +672,19 @@ the bind-key* (with star) will override key bindings in all minor modes:
   :config
   (indent-guide-global-mode))
 #+END_SRC
+
+*** [all-the-icons]
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons)
+#+END_SRC
+
+*** [neotree]
+
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :bind
+  ("<f5>" . neotree-toggle)
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+#+END_SRC
