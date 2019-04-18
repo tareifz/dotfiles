@@ -339,3 +339,5 @@ before we send our 'ok' to the SessionManager."
   ("<f5>" . neotree-toggle)
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+
+(use-package magit)
