@@ -412,6 +412,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+(load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 #+END_SRC
 
 *** Theme packages
@@ -422,7 +423,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 ;; (use-package atom-one-dark-theme)
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
-(use-package hemera-theme)
+;; (use-package hemera-theme)
 #+END_SRC
 
 ** Packages

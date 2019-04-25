@@ -211,13 +211,14 @@ before we send our 'ok' to the SessionManager."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
+(load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
 ;; (use-package atom-one-dark-theme)
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
-(use-package hemera-theme)
+;; (use-package hemera-theme)
 
 (use-package org)
 
