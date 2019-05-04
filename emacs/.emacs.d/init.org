@@ -412,7 +412,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-(load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 #+END_SRC
 
 *** Theme packages
@@ -424,6 +424,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
 ;; (use-package hemera-theme)
+(use-package monokai-pro-theme)
 #+END_SRC
 
 ** Packages
@@ -694,4 +695,31 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit)
+#+END_SRC
+
+*** [spaceline-config]
+
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq powerline-default-separator 'bar
+        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(spaceline-spacemacs-theme))
+#+END_SRC
+
+*** [hl-todo]
+
+#+BEGIN_SRC emacs-lisp
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode))
+#+END_SRC
+
+*** [hlinum]
+
+#+BEGIN_SRC emacs-lisp
+(use-package hlinum
+  :config
+  (hlinum-activate))
 #+END_SRC

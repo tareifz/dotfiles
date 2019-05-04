@@ -211,7 +211,7 @@ before we send our 'ok' to the SessionManager."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
 ;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-(load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
+;; (load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 
 ;; (use-package sourcerer-theme)
 ;; (use-package dracula-theme)
@@ -219,6 +219,7 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
 ;; (use-package hemera-theme)
+(use-package monokai-pro-theme)
 
 (use-package org)
 
@@ -342,3 +343,18 @@ before we send our 'ok' to the SessionManager."
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 (use-package magit)
+
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (setq powerline-default-separator 'bar
+        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(spaceline-spacemacs-theme))
+
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode))
+
+(use-package hlinum
+  :config
+  (hlinum-activate))
