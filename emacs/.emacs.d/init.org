@@ -112,10 +112,8 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       ;;(set-frame-font "Terminus:antialias=none")
-                                       ;;(set-face-attribute 'default nil :height 120)
-                                       (set-frame-font "Hack")
-                                       (set-face-attribute 'default nil :height 160)))))
+                                       (set-frame-font "Terminus:antialias=none")
+                                       (set-face-attribute 'default nil :height 110)))))
 #+END_SRC
 
 ** General Settings
@@ -347,14 +345,14 @@ depending on cursor position:
     General settings:
 
 #+BEGIN_SRC emacs-lisp
-;; (set-frame-font "Ubuntu Mono")
-;; (set-frame-font "More Perfect DOS VGA")
-;; (set-frame-font "Unifont")
-;; (set-frame-font "Terminus:antialias=none")
-;; (set-face-attribute 'default nil :height 120)
-;; (set-frame-font "Monaco")
-(set-frame-font "Hack")
-(set-face-attribute 'default nil :height 120)
+  ;; (set-frame-font "Ubuntu Mono")
+  ;; (set-frame-font "More Perfect DOS VGA")
+  ;; (set-frame-font "Unifont")
+  (set-frame-font "Terminus:antialias=none")
+  (set-face-attribute 'default nil :height 110)
+  ;; (set-frame-font "Monaco")
+  ;; (set-frame-font "Gohu GohuFont")
+  ;; (set-face-attribute 'default nil :height 120)
 #+END_SRC
 
     For Arch-Linux:
@@ -444,7 +442,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [rainbow-mode]
     Represent colors with the color they represent as background:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package rainbow-mode
   :hook
   (prog-mode . rainbow-mode))
@@ -722,4 +720,22 @@ the bind-key* (with star) will override key bindings in all minor modes:
 (use-package hlinum
   :config
   (hlinum-activate))
+#+END_SRC
+
+*** [fish-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package fish-mode)
+#+END_SRC
+
+*** [yaml-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode)
+#+END_SRC
+
+*** [toml-mode]
+
+#+BEGIN_SRC emacs-lisp
+(use-package toml-mode)
 #+END_SRC

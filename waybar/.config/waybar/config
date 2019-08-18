@@ -1,0 +1,103 @@
+[
+  {
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": [],
+    "sway/workspaces": {
+      "persistant_workspaces": {
+        "1: : www >": [],
+        "2: : term >": [],
+        "3: : code >": []
+      }
+    },
+    "sway/window": {
+      "format": " ░▒▓ {} ▓▒░"
+    },
+    "sway/mode": {
+      "format": "<span style=\"italic\">{}</span>"
+    }
+  },
+  {
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "name": "bottom-bar",
+    "height": 28,
+    "modules-left": ["custom/cpu-usage","custom/mem-usage"],
+    "modules-right": ["pulseaudio", "network", "temperature", "backlight", "battery", "clock", "tray"],
+    "tray": {
+      // "icon-size": 21,
+      "spacing": 10
+    },
+    "clock": {
+      "interval": 1,
+      "format": "{:%F <span foreground='yellow'>░▒▓</span> %r}",
+      "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+      "format-alt": "{:%Y-%m-%d}"
+    },
+    "custom/cpu-usage": {
+      "format": "{}  ",
+      "interval": 1 , // Remove this if your script is endless and write in loop
+      "exec": "fish $HOME/.config/waybar/custom-scripts/cpu-usage.fish 2> /dev/null"
+    },
+    "custom/mem-usage": {
+      "format": "<span foreground='#445678'>░▒▓</span> {}",
+      "interval": 1 , // Remove this if your script is endless and write in loop
+      "exec": "fish $HOME/.config/waybar/custom-scripts/mem-usage.fish 2> /dev/null",
+      "tooltip": true
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": "{temperatureC}°C {icon}",
+      "format-icons": ["", "", ""]
+    },
+    "backlight": {
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""]
+    },
+    "battery": {
+      "states": {
+        // "good": 95,
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% ",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      // "format-good": "", // An empty format will hide the module
+      // "format-full": "",
+      "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected ⚠",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+      // "scroll-step": 1, // %, can be a float
+      "format": "{volume}% {icon} {format_source}",
+      "format-bluetooth": "{volume}% {icon} {format_source}",
+      "format-muted": " {format_source}",
+      "format-source": "{volume}% ",
+      "format-source-muted": "",
+      "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "pavucontrol"
+    }
+  }
+]
+v

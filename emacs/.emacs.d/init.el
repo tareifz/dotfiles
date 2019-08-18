@@ -72,10 +72,8 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       ;;(set-frame-font "Terminus:antialias=none")
-                                       ;;(set-face-attribute 'default nil :height 120)
-                                       (set-frame-font "Hack")
-                                       (set-face-attribute 'default nil :height 160)))))
+                                       (set-frame-font "Terminus:antialias=none")
+                                       (set-face-attribute 'default nil :height 110)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -175,11 +173,11 @@ before we send our 'ok' to the SessionManager."
 ;; (set-frame-font "Ubuntu Mono")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-;; (set-frame-font "Terminus:antialias=none")
-;; (set-face-attribute 'default nil :height 120)
+(set-frame-font "Terminus:antialias=none")
+(set-face-attribute 'default nil :height 110)
 ;; (set-frame-font "Monaco")
-(set-frame-font "Hack")
-(set-face-attribute 'default nil :height 120)
+;; (set-frame-font "Gohu GohuFont")
+;; (set-face-attribute 'default nil :height 120)
 
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)
@@ -224,10 +222,6 @@ before we send our 'ok' to the SessionManager."
 (use-package org)
 
 (use-package try)
-
-(use-package rainbow-mode
-  :hook
-  (prog-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
   :requires rainbow-mode
@@ -358,3 +352,9 @@ before we send our 'ok' to the SessionManager."
 (use-package hlinum
   :config
   (hlinum-activate))
+
+(use-package fish-mode)
+
+(use-package yaml-mode)
+
+(use-package toml-mode)
