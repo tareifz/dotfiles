@@ -171,10 +171,10 @@ before we send our 'ok' to the SessionManager."
 (setq bookmark-save-flag 1)
 
 ;; (set-frame-font "Ubuntu Mono")
-;; (set-frame-font "More Perfect DOS VGA")
+(set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
-(set-frame-font "Terminus:antialias=none")
-(set-face-attribute 'default nil :height 110)
+;; (set-frame-font "Terminus:antialias=none")
+(set-face-attribute 'default nil :height 120)
 ;; (set-frame-font "Monaco")
 ;; (set-frame-font "Gohu GohuFont")
 ;; (set-face-attribute 'default nil :height 120)
@@ -218,6 +218,7 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package panda-theme)
 ;; (use-package hemera-theme)
 (use-package monokai-pro-theme)
+;; (use-package cherry-blossom-theme)
 
 (use-package org)
 
@@ -227,10 +228,6 @@ before we send our 'ok' to the SessionManager."
   :requires rainbow-mode
   :hook
   (prog-mode . rainbow-delimiters-mode))
-
-(use-package aggressive-indent
-  :hook
-  (prog-mode . aggressive-indent-mode))
 
 (use-package company
   :hook (prog-mode . company-mode)
@@ -358,3 +355,7 @@ before we send our 'ok' to the SessionManager."
 (use-package yaml-mode)
 
 (use-package toml-mode)
+
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))

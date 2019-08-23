@@ -346,10 +346,10 @@ depending on cursor position:
 
 #+BEGIN_SRC emacs-lisp
   ;; (set-frame-font "Ubuntu Mono")
-  ;; (set-frame-font "More Perfect DOS VGA")
+  (set-frame-font "More Perfect DOS VGA")
   ;; (set-frame-font "Unifont")
-  (set-frame-font "Terminus:antialias=none")
-  (set-face-attribute 'default nil :height 110)
+  ;; (set-frame-font "Terminus:antialias=none")
+  (set-face-attribute 'default nil :height 120)
   ;; (set-frame-font "Monaco")
   ;; (set-frame-font "Gohu GohuFont")
   ;; (set-face-attribute 'default nil :height 120)
@@ -416,13 +416,14 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** Theme packages
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package sourcerer-theme)
-;; (use-package dracula-theme)
-;; (use-package atom-one-dark-theme)
-;; (use-package hydandata-light-theme)
-;; (use-package panda-theme)
-;; (use-package hemera-theme)
-(use-package monokai-pro-theme)
+  ;; (use-package sourcerer-theme)
+  ;; (use-package dracula-theme)
+  ;; (use-package atom-one-dark-theme)
+  ;; (use-package hydandata-light-theme)
+  ;; (use-package panda-theme)
+  ;; (use-package hemera-theme)
+  (use-package monokai-pro-theme)
+  ;; (use-package cherry-blossom-theme)
 #+END_SRC
 
 ** Packages
@@ -461,7 +462,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
 *** [aggressive-indent]
     Minor mode that keeps your code always indented:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package aggressive-indent
   :hook
   (prog-mode . aggressive-indent-mode))
@@ -738,4 +739,12 @@ the bind-key* (with star) will override key bindings in all minor modes:
 
 #+BEGIN_SRC emacs-lisp
 (use-package toml-mode)
+#+END_SRC
+
+*** [docker]
+
+#+BEGIN_SRC emacs-lisp
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
 #+END_SRC
