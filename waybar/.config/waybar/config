@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": [],
+    "modules-right": ["custom/power"],
     "sway/workspaces": {
       "persistant_workspaces": {
         "1: : www >": [],
@@ -20,7 +20,11 @@
     },
     "sway/mode": {
       "format": "<span style=\"italic\">{}</span>"
-    }
+    },
+     "custom/power": {
+     "format":"  ",
+     "on-click":"swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'systemctl suspend' -b 'shutdown' 'systemctl poweroff'"
+     }
   },
   {
     "layer": "top", // Waybar at top layer
