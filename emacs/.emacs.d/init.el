@@ -220,6 +220,12 @@ before we send our 'ok' to the SessionManager."
 (use-package monokai-pro-theme)
 ;; (use-package cherry-blossom-theme)
 
+(defun insert-crystal-template()
+  (when (= (point-max) (point-min))
+    (insert-file "./templates/crystal.cr")))
+
+(add-hook 'crystal-mode-hook 'insert-crystal-template)
+
 (use-package org)
 
 (use-package try)

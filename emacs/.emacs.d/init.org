@@ -426,6 +426,18 @@ the bind-key* (with star) will override key bindings in all minor modes:
   ;; (use-package cherry-blossom-theme)
 #+END_SRC
 
+** Templates
+
+Templetes to be inserted for new files
+
+#+BEGIN_SRC emacs-lisp
+(defun insert-crystal-template()
+  (when (= (point-max) (point-min))
+    (insert-file "./templates/crystal.cr")))
+
+(add-hook 'crystal-mode-hook 'insert-crystal-template)
+#+END_SRC
+
 ** Packages
 *** [org-mode]
 
