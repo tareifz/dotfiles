@@ -21,22 +21,6 @@ Then `stow your-app`
 
 ## Preview
 
-### Emacs
-
-![Emacs Lisp](./resources/emacs-lisp.png "Emacs Lisp")
-
-![Emacs Rust](./resources/emacs-rust.png "Emacs Rust-Mode")
-
----
-
-### Bash
-
-![Bash Colors](./resources/terminal.png "Custom Prompt")
-
----
-
-### Theme
-
-![Mac OS X 11 Theme](./resources/osx-11-theme.png "OS X 11 Theme")
+![Sway Emacs Alacritty](./resources/sway-emacs-alacritty.png "Sway Emacs Alacritty")
 
 ---
