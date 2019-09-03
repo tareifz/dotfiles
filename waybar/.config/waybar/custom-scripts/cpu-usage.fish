@@ -27,7 +27,7 @@ else if test "$CPU_USAGE" -lt 75
    set TICKS_COLOR '#ffe500'
 else if test "$CPU_USAGE" -lt 90
    set TICKS_COLOR '#ff9c00'
-else if test "$CPU_USAGE" -lte 100
+else if test "$CPU_USAGE" -lt 101
    set TICKS_COLOR '#ff0000'
 end
 

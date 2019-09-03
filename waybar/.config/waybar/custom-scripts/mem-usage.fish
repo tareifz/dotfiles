@@ -30,7 +30,7 @@ else if test "$MEM_USED_PERC" -lt 75
    set TICKS_COLOR '#ffe500'
 else if test "$MEM_USED_PERC" -lt 90
    set TICKS_COLOR '#ff9c00'
-else if test "$MEM_USED_PERC" -lte 100
+else if test "$MEM_USED_PERC" -lt 100
    set TICKS_COLOR '#ff0000'
 end
 
