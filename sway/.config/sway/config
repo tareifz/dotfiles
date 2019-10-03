@@ -196,5 +196,5 @@ default_border pixel 1
 
 gaps inner 10
 
-client.focused #FF6105 #285577 #ffffff #2e9ef4 #FF6105
+client.focused #FF6105 #285577 #ffffff #FF6105 #FF6105
 client.unfocused #eeeeee #111111 #888888 #292d2e #444444
