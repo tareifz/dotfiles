@@ -422,7 +422,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
   ;; (use-package hydandata-light-theme)
   ;; (use-package panda-theme)
   ;; (use-package hemera-theme)
-  (use-package monokai-pro-theme)
+  ;; (use-package monokai-pro-theme)
   ;; (use-package cherry-blossom-theme)
 #+END_SRC
 

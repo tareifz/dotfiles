@@ -217,7 +217,7 @@ before we send our 'ok' to the SessionManager."
 ;; (use-package hydandata-light-theme)
 ;; (use-package panda-theme)
 ;; (use-package hemera-theme)
-(use-package monokai-pro-theme)
+;; (use-package monokai-pro-theme)
 ;; (use-package cherry-blossom-theme)
 
 (defun insert-crystal-template()
