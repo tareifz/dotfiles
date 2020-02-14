@@ -112,8 +112,8 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       (set-frame-font "Terminus:antialias=none")
-                                       (set-face-attribute 'default nil :height 110)))))
+                                       (set-frame-font "Ubuntu Mono")
+                                       (set-face-attribute 'default nil :height 140)))))
 #+END_SRC
 
 ** General Settings
@@ -345,11 +345,11 @@ depending on cursor position:
     General settings:
 
 #+BEGIN_SRC emacs-lisp
-  ;; (set-frame-font "Ubuntu Mono")
-  (set-frame-font "More Perfect DOS VGA")
+  (set-frame-font "Ubuntu Mono")
+  ;; (set-frame-font "More Perfect DOS VGA")
   ;; (set-frame-font "Unifont")
   ;; (set-frame-font "Terminus:antialias=none")
-  (set-face-attribute 'default nil :height 120)
+  (set-face-attribute 'default nil :height 140)
   ;; (set-frame-font "Monaco")
   ;; (set-frame-font "Gohu GohuFont")
   ;; (set-face-attribute 'default nil :height 120)
@@ -424,6 +424,7 @@ the bind-key* (with star) will override key bindings in all minor modes:
   ;; (use-package hemera-theme)
   ;; (use-package monokai-pro-theme)
   ;; (use-package cherry-blossom-theme)
+(use-package modus-operandi-theme)
 #+END_SRC
 
 ** Templates
@@ -597,7 +598,11 @@ Templetes to be inserted for new files
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck-rust
   :requires (flycheck rust-mode)
-  :hook (rust-mode . flycheck-rust-setup))
+  :hook
+  (flycheck-mode . flycheck-rust-setup))
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 #+END_SRC
 
 *** [geiser]

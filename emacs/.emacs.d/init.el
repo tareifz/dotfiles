@@ -72,8 +72,8 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       (set-frame-font "Terminus:antialias=none")
-                                       (set-face-attribute 'default nil :height 110)))))
+                                       (set-frame-font "Ubuntu Mono")
+                                       (set-face-attribute 'default nil :height 140)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -170,11 +170,11 @@ before we send our 'ok' to the SessionManager."
 
 (setq bookmark-save-flag 1)
 
-;; (set-frame-font "Ubuntu Mono")
-(set-frame-font "More Perfect DOS VGA")
+(set-frame-font "Ubuntu Mono")
+;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
 ;; (set-frame-font "Terminus:antialias=none")
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 140)
 ;; (set-frame-font "Monaco")
 ;; (set-frame-font "Gohu GohuFont")
 ;; (set-face-attribute 'default nil :height 120)
@@ -212,13 +212,14 @@ before we send our 'ok' to the SessionManager."
 ;; (load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 
 ;; (use-package sourcerer-theme)
-;; (use-package dracula-theme)
-;; (use-package atom-one-dark-theme)
-;; (use-package hydandata-light-theme)
-;; (use-package panda-theme)
-;; (use-package hemera-theme)
-;; (use-package monokai-pro-theme)
-;; (use-package cherry-blossom-theme)
+  ;; (use-package dracula-theme)
+  ;; (use-package atom-one-dark-theme)
+  ;; (use-package hydandata-light-theme)
+  ;; (use-package panda-theme)
+  ;; (use-package hemera-theme)
+  ;; (use-package monokai-pro-theme)
+  ;; (use-package cherry-blossom-theme)
+(use-package modus-operandi-theme)
 
 (defun insert-crystal-template()
   (when (= (point-max) (point-min))
@@ -296,7 +297,11 @@ before we send our 'ok' to the SessionManager."
 
 (use-package flycheck-rust
   :requires (flycheck rust-mode)
-  :hook (rust-mode . flycheck-rust-setup))
+  :hook
+  (flycheck-mode . flycheck-rust-setup))
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package flymd
   :custom
