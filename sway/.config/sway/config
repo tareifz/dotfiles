@@ -9,7 +9,7 @@ set $right l
 set $term alacritty
 set $menu rofi -show drun -theme flat-red | xarg swaymsg exec --
 
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+# exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 ### Output configuration
 #
