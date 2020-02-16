@@ -20,14 +20,14 @@ pacstrap /mnt base \
          mesa-vdpau \
          wayland \
          gdm \
-         sway \
-         swaybg \
-         waybar \
+         gnome \
          stow \
          git \
          firefox \
          fish \
-         rofi
+         nodejs \
+         alsa-utils \
+         xclip
 
 #### intel-ucode or amd-ucode ####
 
