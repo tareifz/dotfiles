@@ -475,7 +475,7 @@ Templetes to be inserted for new files
 *** [aggressive-indent]
     Minor mode that keeps your code always indented:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package aggressive-indent
   :hook
   (prog-mode . aggressive-indent-mode))
@@ -502,7 +502,7 @@ Templetes to be inserted for new files
 *** [racer]
     Provide rust code completion with Company:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; rustup component add rust-src
 ;; cargo install racer
 (use-package racer
@@ -764,4 +764,44 @@ Templetes to be inserted for new files
 (use-package docker
   :ensure t
   :bind ("C-c d" . docker))
+#+END_SRC
+
+*** [yascroll]
+Scroll bar package
+
+#+BEGIN_SRC emacs-lisp
+(use-package yascroll
+  :config
+  (global-yascroll-bar-mode 1))
+#+END_SRC
+
+*** [lsp-mode]
+
+Language Server Protocol Support for Emacs
+
+#+BEGIN_SRC emacs-lisp
+;; install -> yay rust-analyzer
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((rust-mode . lsp)
+    (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (setq lsp-rust-server 'rust-analyzer))
+#+END_SRC
+
+*** [lsp-ui]
+
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-ui)
+#+END_SRC
+
+*** [company-lsp]
+
+#+BEGIN_SRC emacs-lisp
+(use-package company-lsp
+  :config
+  (push 'company-lsp company-backends)
+  (setq company-lsp-async 1))
 #+END_SRC

@@ -38,3 +38,5 @@ curl https://sh.rustup.rs -sSf | sh
 
 # echo /usr/local/bin/fish | sudo tee -a /etc/shells
 chsh -s /usr/bin/fish
+
+yay rust-analyzer

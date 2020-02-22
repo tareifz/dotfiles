@@ -236,6 +236,10 @@ before we send our 'ok' to the SessionManager."
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
+(use-package aggressive-indent
+  :hook
+  (prog-mode . aggressive-indent-mode))
+
 (use-package company
   :hook (prog-mode . company-mode)
   :custom
@@ -243,14 +247,6 @@ before we send our 'ok' to the SessionManager."
   (company-tooltip-align-annotations t))
 
 (use-package rust-mode)
-
-;; rustup component add rust-src
-;; cargo install racer
-(use-package racer
-  :requires rust-mode
-  :hook
-  ((rust-mode . racer-mode)
-   (racer-mode . eldoc-mode)))
 
 (use-package multiple-cursors
   :bind
@@ -370,3 +366,24 @@ before we send our 'ok' to the SessionManager."
 (use-package docker
   :ensure t
   :bind ("C-c d" . docker))
+
+(use-package yascroll
+  :config
+  (global-yascroll-bar-mode 1))
+
+;; install -> yay rust-analyzer
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((rust-mode . lsp)
+    (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (setq lsp-rust-server 'rust-analyzer))
+
+(use-package lsp-ui)
+
+(use-package company-lsp
+  :config
+  (push 'company-lsp company-backends)
+  (setq company-lsp-async 1))
