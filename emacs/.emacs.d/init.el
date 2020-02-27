@@ -387,3 +387,11 @@ before we send our 'ok' to the SessionManager."
   :config
   (push 'company-lsp company-backends)
   (setq company-lsp-async 1))
+
+(use-package auto-package-update
+  :config
+  (auto-package-update-maybe))
+
+(use-package focus
+  :hook
+  (prog-mode . focus-mode))

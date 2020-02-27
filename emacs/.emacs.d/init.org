@@ -805,3 +805,19 @@ Language Server Protocol Support for Emacs
   (push 'company-lsp company-backends)
   (setq company-lsp-async 1))
 #+END_SRC
+
+*** [auto-package-update]
+
+#+BEGIN_SRC emacs-lisp
+(use-package auto-package-update
+  :config
+  (auto-package-update-maybe))
+#+END_SRC
+
+*** [focus]
+
+#+BEGIN_SRC emacs-lisp
+(use-package focus
+  :hook
+  (prog-mode . focus-mode))
+#+END_SRC
