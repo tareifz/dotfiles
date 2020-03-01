@@ -392,6 +392,6 @@ before we send our 'ok' to the SessionManager."
   :config
   (auto-package-update-maybe))
 
-(use-package focus
-  :hook
-  (prog-mode . focus-mode))
+(use-package restclient
+  :config
+    (add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode)))

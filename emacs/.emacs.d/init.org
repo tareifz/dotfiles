@@ -816,8 +816,16 @@ Language Server Protocol Support for Emacs
 
 *** [focus]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package focus
   :hook
   (prog-mode . focus-mode))
+#+END_SRC
+
+*** [restclient]
+
+#+BEGIN_SRC emacs-lisp
+(use-package restclient
+  :config
+    (add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode)))
 #+END_SRC

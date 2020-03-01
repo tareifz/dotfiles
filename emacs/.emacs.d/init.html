@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-27 Thu 22:12 -->
+<!-- 2020-02-29 Sat 12:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tareifz Emacs Configuration</title>
@@ -234,94 +234,95 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8709fa5">1. Configurations</a>
+<li><a href="#org6a921c5">1. Configurations</a>
 <ul>
-<li><a href="#org5bcc6d9">1.1. Startup</a>
+<li><a href="#orge073453">1.1. Startup</a>
 <ul>
-<li><a href="#org06d26de">1.1.1. Package Archives</a></li>
-<li><a href="#org5ed4f99">1.1.2. Use-package</a></li>
-<li><a href="#orgac7b8cf">1.1.3. Personal Informations</a></li>
-<li><a href="#org64b1e6f">1.1.4. Emacs Daemon</a></li>
+<li><a href="#org853d677">1.1.1. Package Archives</a></li>
+<li><a href="#org7eb330e">1.1.2. Use-package</a></li>
+<li><a href="#org18ddd28">1.1.3. Personal Informations</a></li>
+<li><a href="#org51ff82e">1.1.4. Emacs Daemon</a></li>
 </ul>
 </li>
-<li><a href="#orgbece3d4">1.2. General Settings</a>
+<li><a href="#org063ad38">1.2. General Settings</a>
 <ul>
-<li><a href="#orgc81b81e">1.2.1. Confirmation</a></li>
-<li><a href="#orgf05904c">1.2.2. Highlight Parentheses</a></li>
-<li><a href="#orga2c9f50">1.2.3. Auto Close Pairs</a></li>
-<li><a href="#orgdcda079">1.2.4. Highlight Tabulations</a></li>
-<li><a href="#orgff19147">1.2.5. Show Trailing Whitespaces</a></li>
-<li><a href="#org2b22153">1.2.6. Remove Useless Whitespaces</a></li>
-<li><a href="#org4dd6f8d">1.2.7. Skip Splash Screen</a></li>
-<li><a href="#org0703495">1.2.8. Show Empty Line Markers</a></li>
-<li><a href="#org0a5d5b6">1.2.9. Make Ibuffer Default</a></li>
-<li><a href="#org0b4a318">1.2.10. Delete Selection</a></li>
-<li><a href="#orgf20d0a2">1.2.11. Highlight Current Line</a></li>
-<li><a href="#orgf8b7cf3">1.2.12. Refreash File</a></li>
-<li><a href="#org8e1e235">1.2.13. Prettify Symbols</a></li>
-<li><a href="#org421462f">1.2.14. Indentation</a></li>
-<li><a href="#org9a9683c">1.2.15. Ido Mode</a></li>
-<li><a href="#org7c7829d">1.2.16. Backup Files</a></li>
-<li><a href="#orgc1d8ea4">1.2.17. File Encoding</a></li>
-<li><a href="#orgec538b1">1.2.18. Global Variables</a></li>
-<li><a href="#org04a15ac">1.2.19. Font Settings</a></li>
-<li><a href="#org4fb7a3f">1.2.20. Custom Settings File</a></li>
+<li><a href="#orgd550070">1.2.1. Confirmation</a></li>
+<li><a href="#org8142144">1.2.2. Highlight Parentheses</a></li>
+<li><a href="#orgc094192">1.2.3. Auto Close Pairs</a></li>
+<li><a href="#org0990fc7">1.2.4. Highlight Tabulations</a></li>
+<li><a href="#org6adbc7c">1.2.5. Show Trailing Whitespaces</a></li>
+<li><a href="#org5dee1ea">1.2.6. Remove Useless Whitespaces</a></li>
+<li><a href="#org990f47f">1.2.7. Skip Splash Screen</a></li>
+<li><a href="#org42e362e">1.2.8. Show Empty Line Markers</a></li>
+<li><a href="#orgcac9c36">1.2.9. Make Ibuffer Default</a></li>
+<li><a href="#org56b3e51">1.2.10. Delete Selection</a></li>
+<li><a href="#orgea76f71">1.2.11. Highlight Current Line</a></li>
+<li><a href="#orgd9b36af">1.2.12. Refreash File</a></li>
+<li><a href="#org32af964">1.2.13. Prettify Symbols</a></li>
+<li><a href="#org79968e8">1.2.14. Indentation</a></li>
+<li><a href="#org9687fbe">1.2.15. Ido Mode</a></li>
+<li><a href="#org5a999f2">1.2.16. Backup Files</a></li>
+<li><a href="#org70992c2">1.2.17. File Encoding</a></li>
+<li><a href="#org1f51591">1.2.18. Global Variables</a></li>
+<li><a href="#org8cf634b">1.2.19. Font Settings</a></li>
+<li><a href="#org76f6faf">1.2.20. Custom Settings File</a></li>
 </ul>
 </li>
-<li><a href="#orgb759dd3">1.3. Functions</a></li>
-<li><a href="#org3f795ab">1.4. Key Bindings</a></li>
-<li><a href="#org22cc4a4">1.5. Themes</a>
+<li><a href="#org89eae0d">1.3. Functions</a></li>
+<li><a href="#org058e822">1.4. Key Bindings</a></li>
+<li><a href="#orgb0c9185">1.5. Themes</a>
 <ul>
-<li><a href="#orge4acab8">1.5.1. Custom User Themes</a></li>
-<li><a href="#org104dcd3">1.5.2. Theme packages</a></li>
+<li><a href="#org0c654fd">1.5.1. Custom User Themes</a></li>
+<li><a href="#org5f1003e">1.5.2. Theme packages</a></li>
 </ul>
 </li>
-<li><a href="#org5e355e3">1.6. Templates</a></li>
-<li><a href="#orgd3891ce">1.7. Packages</a>
+<li><a href="#orgfbffd7b">1.6. Templates</a></li>
+<li><a href="#orgd7149d2">1.7. Packages</a>
 <ul>
-<li><a href="#org36a890f">1.7.1. [org-mode]</a></li>
-<li><a href="#orgc03d25a">1.7.2. [try]</a></li>
-<li><a href="#orgbc40918">1.7.3. [rainbow-mode]</a></li>
-<li><a href="#orgce5aec9">1.7.4. [rainbow-delimiters]</a></li>
-<li><a href="#org602936b">1.7.5. [aggressive-indent]</a></li>
-<li><a href="#orgc993566">1.7.6. [company]</a></li>
-<li><a href="#org11f5bba">1.7.7. [rust-mode]</a></li>
-<li><a href="#org538b03a">1.7.8. [racer]</a></li>
-<li><a href="#orgd898aa5">1.7.9. [multiple-cursors]</a></li>
-<li><a href="#orgd8ba36b">1.7.10. [switch-window]</a></li>
-<li><a href="#org301c76f">1.7.11. [web-mode]</a></li>
-<li><a href="#org0a9ba16">1.7.12. [js2-mode]</a></li>
-<li><a href="#orgf716a65">1.7.13. [impatient-mode]</a></li>
-<li><a href="#org519adce">1.7.14. [which-key]</a></li>
-<li><a href="#org1165fe9">1.7.15. [expand-region]</a></li>
-<li><a href="#org5c6d076">1.7.16. [flycheck]</a></li>
-<li><a href="#org03af67c">1.7.17. [flycheck-rust]</a></li>
-<li><a href="#org1208b21">1.7.18. [geiser]</a></li>
-<li><a href="#orgfbfdc12">1.7.19. [flymd]</a></li>
-<li><a href="#org04aa6cf">1.7.20. [emmet-mode]</a></li>
-<li><a href="#org46046f2">1.7.21. [diff-hl]</a></li>
-<li><a href="#orgda04a92">1.7.22. [projectile]</a></li>
-<li><a href="#orgbca568b">1.7.23. [prettier-js]</a></li>
-<li><a href="#org7530722">1.7.24. [crystal-mode]</a></li>
-<li><a href="#org415393f">1.7.25. [API Blueprint Mode]</a></li>
-<li><a href="#orgb0cdb1e">1.7.26. [eyebrowse-mode]</a></li>
-<li><a href="#org58c7151">1.7.27. [indent-guide]</a></li>
-<li><a href="#org8ec7fe7">1.7.28. [all-the-icons]</a></li>
-<li><a href="#org4c1b722">1.7.29. [neotree]</a></li>
-<li><a href="#org67e78eb">1.7.30. [magit]</a></li>
-<li><a href="#org75a2252">1.7.31. [spaceline-config]</a></li>
-<li><a href="#orgad796cf">1.7.32. [hl-todo]</a></li>
-<li><a href="#org1300735">1.7.33. [hlinum]</a></li>
-<li><a href="#org9ff9281">1.7.34. [fish-mode]</a></li>
-<li><a href="#orgb682ffe">1.7.35. [yaml-mode]</a></li>
-<li><a href="#org87d46a2">1.7.36. [toml-mode]</a></li>
-<li><a href="#org6c34a13">1.7.37. [docker]</a></li>
-<li><a href="#org3379e20">1.7.38. [yascroll]</a></li>
-<li><a href="#orge0429ab">1.7.39. [lsp-mode]</a></li>
-<li><a href="#orge4851df">1.7.40. [lsp-ui]</a></li>
-<li><a href="#org302168e">1.7.41. [company-lsp]</a></li>
-<li><a href="#orgd67f1a5">1.7.42. [auto-package-update]</a></li>
-<li><a href="#org4385134">1.7.43. [focus]</a></li>
+<li><a href="#org64dc7c0">1.7.1. [org-mode]</a></li>
+<li><a href="#orga76a77c">1.7.2. [try]</a></li>
+<li><a href="#org07aea14">1.7.3. [rainbow-mode]</a></li>
+<li><a href="#org4b3fd5d">1.7.4. [rainbow-delimiters]</a></li>
+<li><a href="#orgf01c67c">1.7.5. [aggressive-indent]</a></li>
+<li><a href="#org33fcfb3">1.7.6. [company]</a></li>
+<li><a href="#org932b3e7">1.7.7. [rust-mode]</a></li>
+<li><a href="#orge09057e">1.7.8. [racer]</a></li>
+<li><a href="#org16d9013">1.7.9. [multiple-cursors]</a></li>
+<li><a href="#org5fda9aa">1.7.10. [switch-window]</a></li>
+<li><a href="#orgb218e6b">1.7.11. [web-mode]</a></li>
+<li><a href="#orge0ff27f">1.7.12. [js2-mode]</a></li>
+<li><a href="#org29761c8">1.7.13. [impatient-mode]</a></li>
+<li><a href="#org24f07f2">1.7.14. [which-key]</a></li>
+<li><a href="#org71bf17c">1.7.15. [expand-region]</a></li>
+<li><a href="#orgbf549d8">1.7.16. [flycheck]</a></li>
+<li><a href="#orga47ce00">1.7.17. [flycheck-rust]</a></li>
+<li><a href="#orge56ab94">1.7.18. [geiser]</a></li>
+<li><a href="#orgc00789e">1.7.19. [flymd]</a></li>
+<li><a href="#orgf700389">1.7.20. [emmet-mode]</a></li>
+<li><a href="#org6f2c3bc">1.7.21. [diff-hl]</a></li>
+<li><a href="#orga90962c">1.7.22. [projectile]</a></li>
+<li><a href="#orgc9e36a0">1.7.23. [prettier-js]</a></li>
+<li><a href="#org22793df">1.7.24. [crystal-mode]</a></li>
+<li><a href="#org21c2fc3">1.7.25. [API Blueprint Mode]</a></li>
+<li><a href="#orgb4549c2">1.7.26. [eyebrowse-mode]</a></li>
+<li><a href="#orgf86a9eb">1.7.27. [indent-guide]</a></li>
+<li><a href="#org9877dbd">1.7.28. [all-the-icons]</a></li>
+<li><a href="#orgc0bad7b">1.7.29. [neotree]</a></li>
+<li><a href="#org76b4fd6">1.7.30. [magit]</a></li>
+<li><a href="#org6e68fbe">1.7.31. [spaceline-config]</a></li>
+<li><a href="#org07287b3">1.7.32. [hl-todo]</a></li>
+<li><a href="#orgb2e3b4a">1.7.33. [hlinum]</a></li>
+<li><a href="#orgf9179aa">1.7.34. [fish-mode]</a></li>
+<li><a href="#org0ebdd47">1.7.35. [yaml-mode]</a></li>
+<li><a href="#org87baab0">1.7.36. [toml-mode]</a></li>
+<li><a href="#org98934f9">1.7.37. [docker]</a></li>
+<li><a href="#orgd2d5ccc">1.7.38. [yascroll]</a></li>
+<li><a href="#org7708116">1.7.39. [lsp-mode]</a></li>
+<li><a href="#org2399b2d">1.7.40. [lsp-ui]</a></li>
+<li><a href="#orgc7b277a">1.7.41. [company-lsp]</a></li>
+<li><a href="#orgae95a5a">1.7.42. [auto-package-update]</a></li>
+<li><a href="#org7a279c4">1.7.43. [focus]</a></li>
+<li><a href="#orgf813d6f">1.7.44. [restclient]</a></li>
 </ul>
 </li>
 </ul>
@@ -330,16 +331,16 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org8709fa5" class="outline-2">
-<h2 id="org8709fa5"><span class="section-number-2">1</span> Configurations</h2>
+<div id="outline-container-org6a921c5" class="outline-2">
+<h2 id="org6a921c5"><span class="section-number-2">1</span> Configurations</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org5bcc6d9" class="outline-3">
-<h3 id="org5bcc6d9"><span class="section-number-3">1.1</span> Startup</h3>
+<div id="outline-container-orge073453" class="outline-3">
+<h3 id="orge073453"><span class="section-number-3">1.1</span> Startup</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-org06d26de" class="outline-4">
-<h4 id="org06d26de"><span class="section-number-4">1.1.1</span> Package Archives</h4>
+<div id="outline-container-org853d677" class="outline-4">
+<h4 id="org853d677"><span class="section-number-4">1.1.1</span> Package Archives</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 list of some of emacs packages archive repositories:
@@ -357,8 +358,8 @@ list of some of emacs packages archive repositories:
 </div>
 </div>
 
-<div id="outline-container-org5ed4f99" class="outline-4">
-<h4 id="org5ed4f99"><span class="section-number-4">1.1.2</span> Use-package</h4>
+<div id="outline-container-org7eb330e" class="outline-4">
+<h4 id="org7eb330e"><span class="section-number-4">1.1.2</span> Use-package</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 use-package is a macro to install and configure packages;
@@ -394,8 +395,8 @@ install packages if not in the system.
 </div>
 </div>
 
-<div id="outline-container-orgac7b8cf" class="outline-4">
-<h4 id="orgac7b8cf"><span class="section-number-4">1.1.3</span> Personal Informations</h4>
+<div id="outline-container-org18ddd28" class="outline-4">
+<h4 id="org18ddd28"><span class="section-number-4">1.1.3</span> Personal Informations</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 editor user informations:
@@ -409,8 +410,8 @@ editor user informations:
 </div>
 </div>
 
-<div id="outline-container-org64b1e6f" class="outline-4">
-<h4 id="org64b1e6f"><span class="section-number-4">1.1.4</span> Emacs Daemon</h4>
+<div id="outline-container-org51ff82e" class="outline-4">
+<h4 id="org51ff82e"><span class="section-number-4">1.1.4</span> Emacs Daemon</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 Stopping the emacs daemon:
@@ -488,12 +489,12 @@ Make emacs register as a client with the GNOME session manager, and shutdown gra
 </div>
 </div>
 
-<div id="outline-container-orgbece3d4" class="outline-3">
-<h3 id="orgbece3d4"><span class="section-number-3">1.2</span> General Settings</h3>
+<div id="outline-container-org063ad38" class="outline-3">
+<h3 id="org063ad38"><span class="section-number-3">1.2</span> General Settings</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orgc81b81e" class="outline-4">
-<h4 id="orgc81b81e"><span class="section-number-4">1.2.1</span> Confirmation</h4>
+<div id="outline-container-orgd550070" class="outline-4">
+<h4 id="orgd550070"><span class="section-number-4">1.2.1</span> Confirmation</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Ask "y" or "n" instead of "yes" or "no":
@@ -506,8 +507,8 @@ Ask "y" or "n" instead of "yes" or "no":
 </div>
 </div>
 
-<div id="outline-container-orgf05904c" class="outline-4">
-<h4 id="orgf05904c"><span class="section-number-4">1.2.2</span> Highlight Parentheses</h4>
+<div id="outline-container-org8142144" class="outline-4">
+<h4 id="org8142144"><span class="section-number-4">1.2.2</span> Highlight Parentheses</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Highlight corresponding parentheses when cursor is on one:
@@ -520,8 +521,8 @@ Highlight corresponding parentheses when cursor is on one:
 </div>
 </div>
 
-<div id="outline-container-orga2c9f50" class="outline-4">
-<h4 id="orga2c9f50"><span class="section-number-4">1.2.3</span> Auto Close Pairs</h4>
+<div id="outline-container-orgc094192" class="outline-4">
+<h4 id="orgc094192"><span class="section-number-4">1.2.3</span> Auto Close Pairs</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 Electric pair mode will insert the closing pair automatically:
@@ -534,8 +535,8 @@ Electric pair mode will insert the closing pair automatically:
 </div>
 </div>
 
-<div id="outline-container-orgdcda079" class="outline-4">
-<h4 id="orgdcda079"><span class="section-number-4">1.2.4</span> Highlight Tabulations</h4>
+<div id="outline-container-org0990fc7" class="outline-4">
+<h4 id="org0990fc7"><span class="section-number-4">1.2.4</span> Highlight Tabulations</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">setq-default</span> highlight-tabs t)
@@ -544,8 +545,8 @@ Electric pair mode will insert the closing pair automatically:
 </div>
 </div>
 
-<div id="outline-container-orgff19147" class="outline-4">
-<h4 id="orgff19147"><span class="section-number-4">1.2.5</span> Show Trailing Whitespaces</h4>
+<div id="outline-container-org6adbc7c" class="outline-4">
+<h4 id="org6adbc7c"><span class="section-number-4">1.2.5</span> Show Trailing Whitespaces</h4>
 <div class="outline-text-4" id="text-1-2-5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">setq-default</span> show-trailing-whitespace t)
@@ -554,8 +555,8 @@ Electric pair mode will insert the closing pair automatically:
 </div>
 </div>
 
-<div id="outline-container-org2b22153" class="outline-4">
-<h4 id="org2b22153"><span class="section-number-4">1.2.6</span> Remove Useless Whitespaces</h4>
+<div id="outline-container-org5dee1ea" class="outline-4">
+<h4 id="org5dee1ea"><span class="section-number-4">1.2.6</span> Remove Useless Whitespaces</h4>
 <div class="outline-text-4" id="text-1-2-6">
 <p>
 Remove useless whitespace before saving a file:
@@ -569,8 +570,8 @@ Remove useless whitespace before saving a file:
 </div>
 </div>
 
-<div id="outline-container-org4dd6f8d" class="outline-4">
-<h4 id="org4dd6f8d"><span class="section-number-4">1.2.7</span> Skip Splash Screen</h4>
+<div id="outline-container-org990f47f" class="outline-4">
+<h4 id="org990f47f"><span class="section-number-4">1.2.7</span> Skip Splash Screen</h4>
 <div class="outline-text-4" id="text-1-2-7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">setq</span> inhibit-splash-screen t
@@ -581,8 +582,8 @@ Remove useless whitespace before saving a file:
 </div>
 </div>
 
-<div id="outline-container-org0703495" class="outline-4">
-<h4 id="org0703495"><span class="section-number-4">1.2.8</span> Show Empty Line Markers</h4>
+<div id="outline-container-org42e362e" class="outline-4">
+<h4 id="org42e362e"><span class="section-number-4">1.2.8</span> Show Empty Line Markers</h4>
 <div class="outline-text-4" id="text-1-2-8">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">setq-default</span> indicate-empty-lines t)
@@ -593,8 +594,8 @@ Remove useless whitespace before saving a file:
 </div>
 </div>
 
-<div id="outline-container-org0a5d5b6" class="outline-4">
-<h4 id="org0a5d5b6"><span class="section-number-4">1.2.9</span> Make Ibuffer Default</h4>
+<div id="outline-container-orgcac9c36" class="outline-4">
+<h4 id="orgcac9c36"><span class="section-number-4">1.2.9</span> Make Ibuffer Default</h4>
 <div class="outline-text-4" id="text-1-2-9">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defalias</span> '<span style="color: #721045;">list-buffers</span> 'ibuffer)
@@ -603,8 +604,8 @@ Remove useless whitespace before saving a file:
 </div>
 </div>
 
-<div id="outline-container-org0b4a318" class="outline-4">
-<h4 id="org0b4a318"><span class="section-number-4">1.2.10</span> Delete Selection</h4>
+<div id="outline-container-org56b3e51" class="outline-4">
+<h4 id="org56b3e51"><span class="section-number-4">1.2.10</span> Delete Selection</h4>
 <div class="outline-text-4" id="text-1-2-10">
 <p>
 Make typing delete/overwrites selected text:
@@ -617,8 +618,8 @@ Make typing delete/overwrites selected text:
 </div>
 </div>
 
-<div id="outline-container-orgf20d0a2" class="outline-4">
-<h4 id="orgf20d0a2"><span class="section-number-4">1.2.11</span> Highlight Current Line</h4>
+<div id="outline-container-orgea76f71" class="outline-4">
+<h4 id="orgea76f71"><span class="section-number-4">1.2.11</span> Highlight Current Line</h4>
 <div class="outline-text-4" id="text-1-2-11">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-hl-line-mode 1)
@@ -627,8 +628,8 @@ Make typing delete/overwrites selected text:
 </div>
 </div>
 
-<div id="outline-container-orgf8b7cf3" class="outline-4">
-<h4 id="orgf8b7cf3"><span class="section-number-4">1.2.12</span> Refreash File</h4>
+<div id="outline-container-orgd9b36af" class="outline-4">
+<h4 id="orgd9b36af"><span class="section-number-4">1.2.12</span> Refreash File</h4>
 <div class="outline-text-4" id="text-1-2-12">
 <p>
 When a file is updated outside emacs, make it update if it's already opened in emacs:
@@ -641,8 +642,8 @@ When a file is updated outside emacs, make it update if it's already opened in e
 </div>
 </div>
 
-<div id="outline-container-org8e1e235" class="outline-4">
-<h4 id="org8e1e235"><span class="section-number-4">1.2.13</span> Prettify Symbols</h4>
+<div id="outline-container-org32af964" class="outline-4">
+<h4 id="org32af964"><span class="section-number-4">1.2.13</span> Prettify Symbols</h4>
 <div class="outline-text-4" id="text-1-2-13">
 <p>
 Make some word or string show as pretty Unicode symbols.
@@ -672,12 +673,12 @@ Make some word or string show as pretty Unicode symbols.
 </div>
 </div>
 
-<div id="outline-container-org421462f" class="outline-4">
-<h4 id="org421462f"><span class="section-number-4">1.2.14</span> Indentation</h4>
+<div id="outline-container-org79968e8" class="outline-4">
+<h4 id="org79968e8"><span class="section-number-4">1.2.14</span> Indentation</h4>
 <div class="outline-text-4" id="text-1-2-14">
 </div>
 <ol class="org-ol">
-<li><a id="org9eddc29"></a>Spaces or Tabs<br />
+<li><a id="org8e72f43"></a>Spaces or Tabs<br />
 <div class="outline-text-5" id="text-1-2-14-1">
 <p>
 Indent using tabs:
@@ -690,7 +691,7 @@ Indent using tabs:
 </div>
 </li>
 
-<li><a id="org5765bcc"></a>Tab Width<br />
+<li><a id="org57de37d"></a>Tab Width<br />
 <div class="outline-text-5" id="text-1-2-14-2">
 <p>
 Width of two spaces:
@@ -704,7 +705,7 @@ Width of two spaces:
 </div>
 </li>
 
-<li><a id="orga94d10c"></a>Javascript Indentation Size<br />
+<li><a id="org2970b1b"></a>Javascript Indentation Size<br />
 <div class="outline-text-5" id="text-1-2-14-3">
 <p>
 Two spaces:
@@ -717,7 +718,7 @@ Two spaces:
 </div>
 </li>
 
-<li><a id="orgbe75d25"></a>Indent or Insert Tab<br />
+<li><a id="org766eae6"></a>Indent or Insert Tab<br />
 <div class="outline-text-5" id="text-1-2-14-4">
 <p>
      Make tab key call indent command or insert tab character,
@@ -733,8 +734,8 @@ depending on cursor position:
 </ol>
 </div>
 
-<div id="outline-container-org9a9683c" class="outline-4">
-<h4 id="org9a9683c"><span class="section-number-4">1.2.15</span> Ido Mode</h4>
+<div id="outline-container-org9687fbe" class="outline-4">
+<h4 id="org9687fbe"><span class="section-number-4">1.2.15</span> Ido Mode</h4>
 <div class="outline-text-4" id="text-1-2-15">
 <p>
 Enable ido-mode and ido-everywhere:
@@ -778,8 +779,8 @@ Makes ido-mode display vertically:
 </div>
 </div>
 
-<div id="outline-container-org7c7829d" class="outline-4">
-<h4 id="org7c7829d"><span class="section-number-4">1.2.16</span> Backup Files</h4>
+<div id="outline-container-org5a999f2" class="outline-4">
+<h4 id="org5a999f2"><span class="section-number-4">1.2.16</span> Backup Files</h4>
 <div class="outline-text-4" id="text-1-2-16">
 <p>
 Remove all backup files:
@@ -794,8 +795,8 @@ Remove all backup files:
 </div>
 </div>
 
-<div id="outline-container-orgc1d8ea4" class="outline-4">
-<h4 id="orgc1d8ea4"><span class="section-number-4">1.2.17</span> File Encoding</h4>
+<div id="outline-container-org70992c2" class="outline-4">
+<h4 id="org70992c2"><span class="section-number-4">1.2.17</span> File Encoding</h4>
 <div class="outline-text-4" id="text-1-2-17">
 <p>
 Set locale to UTF-8:
@@ -813,8 +814,8 @@ Set locale to UTF-8:
 </div>
 </div>
 
-<div id="outline-container-orgec538b1" class="outline-4">
-<h4 id="orgec538b1"><span class="section-number-4">1.2.18</span> Global Variables</h4>
+<div id="outline-container-org1f51591" class="outline-4">
+<h4 id="org1f51591"><span class="section-number-4">1.2.18</span> Global Variables</h4>
 <div class="outline-text-4" id="text-1-2-18">
 <p>
 Disable menu bar:
@@ -864,8 +865,8 @@ Every time bookmark is changed, automatically save it:
 </div>
 </div>
 
-<div id="outline-container-org04a15ac" class="outline-4">
-<h4 id="org04a15ac"><span class="section-number-4">1.2.19</span> Font Settings</h4>
+<div id="outline-container-org8cf634b" class="outline-4">
+<h4 id="org8cf634b"><span class="section-number-4">1.2.19</span> Font Settings</h4>
 <div class="outline-text-4" id="text-1-2-19">
 <p>
 General settings:
@@ -895,8 +896,8 @@ For Arch-Linux:
 </div>
 </div>
 
-<div id="outline-container-org4fb7a3f" class="outline-4">
-<h4 id="org4fb7a3f"><span class="section-number-4">1.2.20</span> Custom Settings File</h4>
+<div id="outline-container-org76f6faf" class="outline-4">
+<h4 id="org76f6faf"><span class="section-number-4">1.2.20</span> Custom Settings File</h4>
 <div class="outline-text-4" id="text-1-2-20">
 <p>
 Keep auto-generated settings in seperate file:
@@ -910,8 +911,8 @@ Keep auto-generated settings in seperate file:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb759dd3" class="outline-3">
-<h3 id="orgb759dd3"><span class="section-number-3">1.3</span> Functions</h3>
+<div id="outline-container-org89eae0d" class="outline-3">
+<h3 id="org89eae0d"><span class="section-number-3">1.3</span> Functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">tareifz/load-only-theme</span> ()
@@ -942,8 +943,8 @@ Keep auto-generated settings in seperate file:
 </div>
 </div>
 </div>
-<div id="outline-container-org3f795ab" class="outline-3">
-<h3 id="org3f795ab"><span class="section-number-3">1.4</span> Key Bindings</h3>
+<div id="outline-container-org058e822" class="outline-3">
+<h3 id="org058e822"><span class="section-number-3">1.4</span> Key Bindings</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
    Override [C-k] (kill-to-end-of-line).
@@ -956,12 +957,12 @@ the bind-key* (with star) will override key bindings in all minor modes:
 </div>
 </div>
 </div>
-<div id="outline-container-org22cc4a4" class="outline-3">
-<h3 id="org22cc4a4"><span class="section-number-3">1.5</span> Themes</h3>
+<div id="outline-container-orgb0c9185" class="outline-3">
+<h3 id="orgb0c9185"><span class="section-number-3">1.5</span> Themes</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-orge4acab8" class="outline-4">
-<h4 id="orge4acab8"><span class="section-number-4">1.5.1</span> Custom User Themes</h4>
+<div id="outline-container-org0c654fd" class="outline-4">
+<h4 id="org0c654fd"><span class="section-number-4">1.5.1</span> Custom User Themes</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(add-to-list 'custom-theme-load-path <span style="color: #223fbf;">"~/.emacs.d/themes"</span>)
@@ -973,8 +974,8 @@ the bind-key* (with star) will override key bindings in all minor modes:
 </div>
 </div>
 
-<div id="outline-container-org104dcd3" class="outline-4">
-<h4 id="org104dcd3"><span class="section-number-4">1.5.2</span> Theme packages</h4>
+<div id="outline-container-org5f1003e" class="outline-4">
+<h4 id="org5f1003e"><span class="section-number-4">1.5.2</span> Theme packages</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">  <span style="color: #505050;">;; </span><span style="color: #505050;">(use-package sourcerer-theme)</span>
@@ -992,8 +993,8 @@ the bind-key* (with star) will override key bindings in all minor modes:
 </div>
 </div>
 
-<div id="outline-container-org5e355e3" class="outline-3">
-<h3 id="org5e355e3"><span class="section-number-3">1.6</span> Templates</h3>
+<div id="outline-container-orgfbffd7b" class="outline-3">
+<h3 id="orgfbffd7b"><span class="section-number-3">1.6</span> Templates</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Templetes to be inserted for new files
@@ -1010,12 +1011,12 @@ Templetes to be inserted for new files
 </div>
 </div>
 
-<div id="outline-container-orgd3891ce" class="outline-3">
-<h3 id="orgd3891ce"><span class="section-number-3">1.7</span> Packages</h3>
+<div id="outline-container-orgd7149d2" class="outline-3">
+<h3 id="orgd7149d2"><span class="section-number-3">1.7</span> Packages</h3>
 <div class="outline-text-3" id="text-1-7">
 </div>
-<div id="outline-container-org36a890f" class="outline-4">
-<h4 id="org36a890f"><span class="section-number-4">1.7.1</span> [org-mode]</h4>
+<div id="outline-container-org64dc7c0" class="outline-4">
+<h4 id="org64dc7c0"><span class="section-number-4">1.7.1</span> [org-mode]</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">org</span>)
@@ -1024,8 +1025,8 @@ Templetes to be inserted for new files
 </div>
 </div>
 
-<div id="outline-container-orgc03d25a" class="outline-4">
-<h4 id="orgc03d25a"><span class="section-number-4">1.7.2</span> [try]</h4>
+<div id="outline-container-orga76a77c" class="outline-4">
+<h4 id="orga76a77c"><span class="section-number-4">1.7.2</span> [try]</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 This package let you try packages without installing
@@ -1038,8 +1039,8 @@ This package let you try packages without installing
 </div>
 </div>
 
-<div id="outline-container-orgbc40918" class="outline-4">
-<h4 id="orgbc40918"><span class="section-number-4">1.7.3</span> [rainbow-mode]</h4>
+<div id="outline-container-org07aea14" class="outline-4">
+<h4 id="org07aea14"><span class="section-number-4">1.7.3</span> [rainbow-mode]</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 Represent colors with the color they represent as background:
@@ -1054,8 +1055,8 @@ Represent colors with the color they represent as background:
 </div>
 </div>
 
-<div id="outline-container-orgce5aec9" class="outline-4">
-<h4 id="orgce5aec9"><span class="section-number-4">1.7.4</span> [rainbow-delimiters]</h4>
+<div id="outline-container-org4b3fd5d" class="outline-4">
+<h4 id="org4b3fd5d"><span class="section-number-4">1.7.4</span> [rainbow-delimiters]</h4>
 <div class="outline-text-4" id="text-1-7-4">
 <p>
 Rainbow parentheses:
@@ -1071,8 +1072,8 @@ Rainbow parentheses:
 </div>
 </div>
 
-<div id="outline-container-org602936b" class="outline-4">
-<h4 id="org602936b"><span class="section-number-4">1.7.5</span> [aggressive-indent]</h4>
+<div id="outline-container-orgf01c67c" class="outline-4">
+<h4 id="orgf01c67c"><span class="section-number-4">1.7.5</span> [aggressive-indent]</h4>
 <div class="outline-text-4" id="text-1-7-5">
 <p>
 Minor mode that keeps your code always indented:
@@ -1087,8 +1088,8 @@ Minor mode that keeps your code always indented:
 </div>
 </div>
 
-<div id="outline-container-orgc993566" class="outline-4">
-<h4 id="orgc993566"><span class="section-number-4">1.7.6</span> [company]</h4>
+<div id="outline-container-org33fcfb3" class="outline-4">
+<h4 id="org33fcfb3"><span class="section-number-4">1.7.6</span> [company]</h4>
 <div class="outline-text-4" id="text-1-7-6">
 <p>
 Auto-complete engine:
@@ -1105,8 +1106,8 @@ Auto-complete engine:
 </div>
 </div>
 
-<div id="outline-container-org11f5bba" class="outline-4">
-<h4 id="org11f5bba"><span class="section-number-4">1.7.7</span> [rust-mode]</h4>
+<div id="outline-container-org932b3e7" class="outline-4">
+<h4 id="org932b3e7"><span class="section-number-4">1.7.7</span> [rust-mode]</h4>
 <div class="outline-text-4" id="text-1-7-7">
 <p>
 Rust-lang support:
@@ -1119,8 +1120,8 @@ Rust-lang support:
 </div>
 </div>
 
-<div id="outline-container-org538b03a" class="outline-4">
-<h4 id="org538b03a"><span class="section-number-4">1.7.8</span> [racer]</h4>
+<div id="outline-container-orge09057e" class="outline-4">
+<h4 id="orge09057e"><span class="section-number-4">1.7.8</span> [racer]</h4>
 <div class="outline-text-4" id="text-1-7-8">
 <p>
 Provide rust code completion with Company:
@@ -1139,8 +1140,8 @@ Provide rust code completion with Company:
 </div>
 </div>
 
-<div id="outline-container-orgd898aa5" class="outline-4">
-<h4 id="orgd898aa5"><span class="section-number-4">1.7.9</span> [multiple-cursors]</h4>
+<div id="outline-container-org16d9013" class="outline-4">
+<h4 id="org16d9013"><span class="section-number-4">1.7.9</span> [multiple-cursors]</h4>
 <div class="outline-text-4" id="text-1-7-9">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">multiple-cursors</span>
@@ -1153,8 +1154,8 @@ Provide rust code completion with Company:
 </div>
 </div>
 
-<div id="outline-container-orgd8ba36b" class="outline-4">
-<h4 id="orgd8ba36b"><span class="section-number-4">1.7.10</span> [switch-window]</h4>
+<div id="outline-container-org5fda9aa" class="outline-4">
+<h4 id="org5fda9aa"><span class="section-number-4">1.7.10</span> [switch-window]</h4>
 <div class="outline-text-4" id="text-1-7-10">
 <p>
 Will number the window when you try to switch:
@@ -1169,8 +1170,8 @@ Will number the window when you try to switch:
 </div>
 </div>
 
-<div id="outline-container-org301c76f" class="outline-4">
-<h4 id="org301c76f"><span class="section-number-4">1.7.11</span> [web-mode]</h4>
+<div id="outline-container-orgb218e6b" class="outline-4">
+<h4 id="orgb218e6b"><span class="section-number-4">1.7.11</span> [web-mode]</h4>
 <div class="outline-text-4" id="text-1-7-11">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">web-mode</span>
@@ -1188,8 +1189,8 @@ Will number the window when you try to switch:
 </div>
 </div>
 
-<div id="outline-container-org0a9ba16" class="outline-4">
-<h4 id="org0a9ba16"><span class="section-number-4">1.7.12</span> [js2-mode]</h4>
+<div id="outline-container-orge0ff27f" class="outline-4">
+<h4 id="orge0ff27f"><span class="section-number-4">1.7.12</span> [js2-mode]</h4>
 <div class="outline-text-4" id="text-1-7-12">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">js2-mode</span>
@@ -1200,8 +1201,8 @@ Will number the window when you try to switch:
 </div>
 </div>
 
-<div id="outline-container-orgf716a65" class="outline-4">
-<h4 id="orgf716a65"><span class="section-number-4">1.7.13</span> [impatient-mode]</h4>
+<div id="outline-container-org29761c8" class="outline-4">
+<h4 id="org29761c8"><span class="section-number-4">1.7.13</span> [impatient-mode]</h4>
 <div class="outline-text-4" id="text-1-7-13">
 <p>
 Start a server and auto-refresh the page when change happens:
@@ -1217,8 +1218,8 @@ Start a server and auto-refresh the page when change happens:
 </div>
 </div>
 
-<div id="outline-container-org519adce" class="outline-4">
-<h4 id="org519adce"><span class="section-number-4">1.7.14</span> [which-key]</h4>
+<div id="outline-container-org24f07f2" class="outline-4">
+<h4 id="org24f07f2"><span class="section-number-4">1.7.14</span> [which-key]</h4>
 <div class="outline-text-4" id="text-1-7-14">
 <p>
 Show possible completion for unfinished command:
@@ -1234,8 +1235,8 @@ Show possible completion for unfinished command:
 </div>
 </div>
 
-<div id="outline-container-org1165fe9" class="outline-4">
-<h4 id="org1165fe9"><span class="section-number-4">1.7.15</span> [expand-region]</h4>
+<div id="outline-container-org71bf17c" class="outline-4">
+<h4 id="org71bf17c"><span class="section-number-4">1.7.15</span> [expand-region]</h4>
 <div class="outline-text-4" id="text-1-7-15">
 <p>
 Expand selection region outward:
@@ -1249,8 +1250,8 @@ Expand selection region outward:
 </div>
 </div>
 
-<div id="outline-container-org5c6d076" class="outline-4">
-<h4 id="org5c6d076"><span class="section-number-4">1.7.16</span> [flycheck]</h4>
+<div id="outline-container-orgbf549d8" class="outline-4">
+<h4 id="orgbf549d8"><span class="section-number-4">1.7.16</span> [flycheck]</h4>
 <div class="outline-text-4" id="text-1-7-16">
 <p>
 Linting engine:
@@ -1266,8 +1267,8 @@ Linting engine:
 </div>
 </div>
 
-<div id="outline-container-org03af67c" class="outline-4">
-<h4 id="org03af67c"><span class="section-number-4">1.7.17</span> [flycheck-rust]</h4>
+<div id="outline-container-orga47ce00" class="outline-4">
+<h4 id="orga47ce00"><span class="section-number-4">1.7.17</span> [flycheck-rust]</h4>
 <div class="outline-text-4" id="text-1-7-17">
 <p>
 Rust frontend for flycheck:
@@ -1286,8 +1287,8 @@ Rust frontend for flycheck:
 </div>
 </div>
 
-<div id="outline-container-org1208b21" class="outline-4">
-<h4 id="org1208b21"><span class="section-number-4">1.7.18</span> [geiser]</h4>
+<div id="outline-container-orge56ab94" class="outline-4">
+<h4 id="orge56ab94"><span class="section-number-4">1.7.18</span> [geiser]</h4>
 <div class="outline-text-4" id="text-1-7-18">
 <p>
 Scheme tools for Emacs:
@@ -1303,8 +1304,8 @@ Scheme tools for Emacs:
 </div>
 </div>
 
-<div id="outline-container-orgfbfdc12" class="outline-4">
-<h4 id="orgfbfdc12"><span class="section-number-4">1.7.19</span> [flymd]</h4>
+<div id="outline-container-orgc00789e" class="outline-4">
+<h4 id="orgc00789e"><span class="section-number-4">1.7.19</span> [flymd]</h4>
 <div class="outline-text-4" id="text-1-7-19">
 <p>
 Live markdown preview:
@@ -1319,8 +1320,8 @@ Live markdown preview:
 </div>
 </div>
 
-<div id="outline-container-org04aa6cf" class="outline-4">
-<h4 id="org04aa6cf"><span class="section-number-4">1.7.20</span> [emmet-mode]</h4>
+<div id="outline-container-orgf700389" class="outline-4">
+<h4 id="orgf700389"><span class="section-number-4">1.7.20</span> [emmet-mode]</h4>
 <div class="outline-text-4" id="text-1-7-20">
 <p>
 Expand expression to HTML elements:
@@ -1335,8 +1336,8 @@ Expand expression to HTML elements:
 </div>
 </div>
 
-<div id="outline-container-org46046f2" class="outline-4">
-<h4 id="org46046f2"><span class="section-number-4">1.7.21</span> [diff-hl]</h4>
+<div id="outline-container-org6f2c3bc" class="outline-4">
+<h4 id="org6f2c3bc"><span class="section-number-4">1.7.21</span> [diff-hl]</h4>
 <div class="outline-text-4" id="text-1-7-21">
 <p>
 Highlight git changes in buffer:
@@ -1351,8 +1352,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 </div>
-<div id="outline-container-orgda04a92" class="outline-4">
-<h4 id="orgda04a92"><span class="section-number-4">1.7.22</span> [projectile]</h4>
+<div id="outline-container-orga90962c" class="outline-4">
+<h4 id="orga90962c"><span class="section-number-4">1.7.22</span> [projectile]</h4>
 <div class="outline-text-4" id="text-1-7-22">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">projectile</span>
@@ -1364,8 +1365,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 </div>
-<div id="outline-container-orgbca568b" class="outline-4">
-<h4 id="orgbca568b"><span class="section-number-4">1.7.23</span> [prettier-js]</h4>
+<div id="outline-container-orgc9e36a0" class="outline-4">
+<h4 id="orgc9e36a0"><span class="section-number-4">1.7.23</span> [prettier-js]</h4>
 <div class="outline-text-4" id="text-1-7-23">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">prettier-js</span>
@@ -1378,8 +1379,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org7530722" class="outline-4">
-<h4 id="org7530722"><span class="section-number-4">1.7.24</span> [crystal-mode]</h4>
+<div id="outline-container-org22793df" class="outline-4">
+<h4 id="org22793df"><span class="section-number-4">1.7.24</span> [crystal-mode]</h4>
 <div class="outline-text-4" id="text-1-7-24">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">crystal-mode</span>)
@@ -1388,8 +1389,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org415393f" class="outline-4">
-<h4 id="org415393f"><span class="section-number-4">1.7.25</span> [API Blueprint Mode]</h4>
+<div id="outline-container-org21c2fc3" class="outline-4">
+<h4 id="org21c2fc3"><span class="section-number-4">1.7.25</span> [API Blueprint Mode]</h4>
 <div class="outline-text-4" id="text-1-7-25">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">apib-mode</span>
@@ -1400,8 +1401,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-orgb0cdb1e" class="outline-4">
-<h4 id="orgb0cdb1e"><span class="section-number-4">1.7.26</span> [eyebrowse-mode]</h4>
+<div id="outline-container-orgb4549c2" class="outline-4">
+<h4 id="orgb4549c2"><span class="section-number-4">1.7.26</span> [eyebrowse-mode]</h4>
 <div class="outline-text-4" id="text-1-7-26">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">eyebrowse</span>
@@ -1412,8 +1413,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org58c7151" class="outline-4">
-<h4 id="org58c7151"><span class="section-number-4">1.7.27</span> [indent-guide]</h4>
+<div id="outline-container-orgf86a9eb" class="outline-4">
+<h4 id="orgf86a9eb"><span class="section-number-4">1.7.27</span> [indent-guide]</h4>
 <div class="outline-text-4" id="text-1-7-27">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">indent-guide</span>
@@ -1424,8 +1425,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org8ec7fe7" class="outline-4">
-<h4 id="org8ec7fe7"><span class="section-number-4">1.7.28</span> [all-the-icons]</h4>
+<div id="outline-container-org9877dbd" class="outline-4">
+<h4 id="org9877dbd"><span class="section-number-4">1.7.28</span> [all-the-icons]</h4>
 <div class="outline-text-4" id="text-1-7-28">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">all-the-icons</span>)
@@ -1434,8 +1435,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org4c1b722" class="outline-4">
-<h4 id="org4c1b722"><span class="section-number-4">1.7.29</span> [neotree]</h4>
+<div id="outline-container-orgc0bad7b" class="outline-4">
+<h4 id="orgc0bad7b"><span class="section-number-4">1.7.29</span> [neotree]</h4>
 <div class="outline-text-4" id="text-1-7-29">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">neotree</span>
@@ -1448,8 +1449,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org67e78eb" class="outline-4">
-<h4 id="org67e78eb"><span class="section-number-4">1.7.30</span> [magit]</h4>
+<div id="outline-container-org76b4fd6" class="outline-4">
+<h4 id="org76b4fd6"><span class="section-number-4">1.7.30</span> [magit]</h4>
 <div class="outline-text-4" id="text-1-7-30">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">magit</span>)
@@ -1458,8 +1459,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org75a2252" class="outline-4">
-<h4 id="org75a2252"><span class="section-number-4">1.7.31</span> [spaceline-config]</h4>
+<div id="outline-container-org6e68fbe" class="outline-4">
+<h4 id="org6e68fbe"><span class="section-number-4">1.7.31</span> [spaceline-config]</h4>
 <div class="outline-text-4" id="text-1-7-31">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">spaceline-config</span>
@@ -1473,8 +1474,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-orgad796cf" class="outline-4">
-<h4 id="orgad796cf"><span class="section-number-4">1.7.32</span> [hl-todo]</h4>
+<div id="outline-container-org07287b3" class="outline-4">
+<h4 id="org07287b3"><span class="section-number-4">1.7.32</span> [hl-todo]</h4>
 <div class="outline-text-4" id="text-1-7-32">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">hl-todo</span>
@@ -1485,8 +1486,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org1300735" class="outline-4">
-<h4 id="org1300735"><span class="section-number-4">1.7.33</span> [hlinum]</h4>
+<div id="outline-container-orgb2e3b4a" class="outline-4">
+<h4 id="orgb2e3b4a"><span class="section-number-4">1.7.33</span> [hlinum]</h4>
 <div class="outline-text-4" id="text-1-7-33">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">hlinum</span>
@@ -1497,8 +1498,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org9ff9281" class="outline-4">
-<h4 id="org9ff9281"><span class="section-number-4">1.7.34</span> [fish-mode]</h4>
+<div id="outline-container-orgf9179aa" class="outline-4">
+<h4 id="orgf9179aa"><span class="section-number-4">1.7.34</span> [fish-mode]</h4>
 <div class="outline-text-4" id="text-1-7-34">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">fish-mode</span>)
@@ -1507,8 +1508,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-orgb682ffe" class="outline-4">
-<h4 id="orgb682ffe"><span class="section-number-4">1.7.35</span> [yaml-mode]</h4>
+<div id="outline-container-org0ebdd47" class="outline-4">
+<h4 id="org0ebdd47"><span class="section-number-4">1.7.35</span> [yaml-mode]</h4>
 <div class="outline-text-4" id="text-1-7-35">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">yaml-mode</span>)
@@ -1517,8 +1518,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org87d46a2" class="outline-4">
-<h4 id="org87d46a2"><span class="section-number-4">1.7.36</span> [toml-mode]</h4>
+<div id="outline-container-org87baab0" class="outline-4">
+<h4 id="org87baab0"><span class="section-number-4">1.7.36</span> [toml-mode]</h4>
 <div class="outline-text-4" id="text-1-7-36">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">toml-mode</span>)
@@ -1527,8 +1528,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org6c34a13" class="outline-4">
-<h4 id="org6c34a13"><span class="section-number-4">1.7.37</span> [docker]</h4>
+<div id="outline-container-org98934f9" class="outline-4">
+<h4 id="org98934f9"><span class="section-number-4">1.7.37</span> [docker]</h4>
 <div class="outline-text-4" id="text-1-7-37">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">docker</span>
@@ -1539,8 +1540,8 @@ Highlight git changes in buffer:
 </div>
 </div>
 
-<div id="outline-container-org3379e20" class="outline-4">
-<h4 id="org3379e20"><span class="section-number-4">1.7.38</span> [yascroll]</h4>
+<div id="outline-container-orgd2d5ccc" class="outline-4">
+<h4 id="orgd2d5ccc"><span class="section-number-4">1.7.38</span> [yascroll]</h4>
 <div class="outline-text-4" id="text-1-7-38">
 <p>
 Scroll bar package
@@ -1555,8 +1556,8 @@ Scroll bar package
 </div>
 </div>
 
-<div id="outline-container-orge0429ab" class="outline-4">
-<h4 id="orge0429ab"><span class="section-number-4">1.7.39</span> [lsp-mode]</h4>
+<div id="outline-container-org7708116" class="outline-4">
+<h4 id="org7708116"><span class="section-number-4">1.7.39</span> [lsp-mode]</h4>
 <div class="outline-text-4" id="text-1-7-39">
 <p>
 Language Server Protocol Support for Emacs
@@ -1577,8 +1578,8 @@ Language Server Protocol Support for Emacs
 </div>
 </div>
 
-<div id="outline-container-orge4851df" class="outline-4">
-<h4 id="orge4851df"><span class="section-number-4">1.7.40</span> [lsp-ui]</h4>
+<div id="outline-container-org2399b2d" class="outline-4">
+<h4 id="org2399b2d"><span class="section-number-4">1.7.40</span> [lsp-ui]</h4>
 <div class="outline-text-4" id="text-1-7-40">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">lsp-ui</span>)
@@ -1587,8 +1588,8 @@ Language Server Protocol Support for Emacs
 </div>
 </div>
 
-<div id="outline-container-org302168e" class="outline-4">
-<h4 id="org302168e"><span class="section-number-4">1.7.41</span> [company-lsp]</h4>
+<div id="outline-container-orgc7b277a" class="outline-4">
+<h4 id="orgc7b277a"><span class="section-number-4">1.7.41</span> [company-lsp]</h4>
 <div class="outline-text-4" id="text-1-7-41">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">company-lsp</span>
@@ -1600,8 +1601,8 @@ Language Server Protocol Support for Emacs
 </div>
 </div>
 
-<div id="outline-container-orgd67f1a5" class="outline-4">
-<h4 id="orgd67f1a5"><span class="section-number-4">1.7.42</span> [auto-package-update]</h4>
+<div id="outline-container-orgae95a5a" class="outline-4">
+<h4 id="orgae95a5a"><span class="section-number-4">1.7.42</span> [auto-package-update]</h4>
 <div class="outline-text-4" id="text-1-7-42">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">auto-package-update</span>
@@ -1612,8 +1613,8 @@ Language Server Protocol Support for Emacs
 </div>
 </div>
 
-<div id="outline-container-org4385134" class="outline-4">
-<h4 id="org4385134"><span class="section-number-4">1.7.43</span> [focus]</h4>
+<div id="outline-container-org7a279c4" class="outline-4">
+<h4 id="org7a279c4"><span class="section-number-4">1.7.43</span> [focus]</h4>
 <div class="outline-text-4" id="text-1-7-43">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">focus</span>
@@ -1623,12 +1624,24 @@ Language Server Protocol Support for Emacs
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgf813d6f" class="outline-4">
+<h4 id="orgf813d6f"><span class="section-number-4">1.7.44</span> [restclient]</h4>
+<div class="outline-text-4" id="text-1-7-44">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #5317ac;">use-package</span> <span style="color: #0000bb;">restclient</span>
+  <span style="color: #8f0075;">:config</span>
+    (add-to-list 'auto-mode-alist '(<span style="color: #223fbf;">"\\.restclient\\'"</span> . restclient-mode)))
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Tareif Al-Zamil</p>
-<p class="date">Created: 2020-02-27 Thu 22:12</p>
+<p class="date">Created: 2020-02-29 Sat 12:51</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
