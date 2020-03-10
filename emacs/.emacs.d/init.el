@@ -72,7 +72,7 @@ before we send our 'ok' to the SessionManager."
                                        (toggle-scroll-bar -1)
                                        (global-linum-mode t)
                                        (setq-default linum-format " %d ")
-                                       (set-frame-font "Ubuntu Mono")
+                                       (set-frame-font "Fira Code")
                                        (set-face-attribute 'default nil :height 140)))))
 
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -170,7 +170,7 @@ before we send our 'ok' to the SessionManager."
 
 (setq bookmark-save-flag 1)
 
-(set-frame-font "Ubuntu Mono")
+(set-frame-font "Fira Code")
 ;; (set-frame-font "More Perfect DOS VGA")
 ;; (set-frame-font "Unifont")
 ;; (set-frame-font "Terminus:antialias=none")
