@@ -12,7 +12,6 @@
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("marmalade" . "https://marmalade-repo.org/packages/")
         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 #+END_SRC
@@ -47,73 +46,6 @@
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Tareif Al-Zamil"
       user-mail-address "root@tareifz.me")
-#+END_SRC
-
-*** Emacs Daemon
-    Stopping the emacs daemon:
-
-#+BEGIN_SRC emacs-lisp
-(defun server-shutdown ()
-  "Save buffers, Quit, and Shutdown (kill) server"
-  (interactive)
-  (save-some-buffers)
-  (kill-emacs)
-  )
-#+END_SRC
-
-    Make emacs register as a client with the GNOME session manager, and shutdown gracefully when the session ends:
-
-#+BEGIN_SRC emacs-lisp
-;; save & shutdown when we get an "end of session" signal on dbus
-(require 'dbus)
-
-(defun my-register-signals (client-path)
-  "Register for the 'QueryEndSession' and 'EndSession' signals from
-Gnome SessionManager.
-
-When we receive 'QueryEndSession', we just respond with
-'EndSessionResponse(true, \"\")'.  When we receive 'EndSession', we
-append this EndSessionResponse to kill-emacs-hook, and then call
-kill-emacs.  This way, we can shut down the Emacs daemon cleanly
-before we send our 'ok' to the SessionManager."
-  (setq my-gnome-client-path client-path)
-  (let ( (end-session-response (lambda (&optional arg)
-                                 (dbus-call-method-asynchronously
-                                  :session "org.gnome.SessionManager" my-gnome-client-path
-                                  "org.gnome.SessionManager.ClientPrivate" "EndSessionResponse" nil
-                                  t "") ) ) )
-         (dbus-register-signal
-          :session "org.gnome.SessionManager" my-gnome-client-path
-          "org.gnome.SessionManager.ClientPrivate" "QueryEndSession"
-          end-session-response )
-         (dbus-register-signal
-          :session "org.gnome.SessionManager" my-gnome-client-path
-          "org.gnome.SessionManager.ClientPrivate" "EndSession"
-          `(lambda (arg)
-             (add-hook 'kill-emacs-hook ,end-session-response t)
-             (kill-emacs) ) ) ) )
-
-;; DESKTOP_AUTOSTART_ID is set by the Gnome desktop manager when emacs
-;; is autostarted.  We can use it to register as a client with gnome
-;; SessionManager.
-(dbus-call-method-asynchronously
- :session "org.gnome.SessionManager"
- "/org/gnome/SessionManager"
- "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
- "Emacs server" (getenv "DESKTOP_AUTOSTART_ID"))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-                  (with-selected-frame frame
-                                       (progn (menu-bar-mode -1)
-                                       (tool-bar-mode -1)
-                                       (toggle-scroll-bar -1)
-                                       (global-linum-mode t)
-                                       (setq-default linum-format " %d ")
-                                       (set-frame-font "Fira Code")
-                                       (set-face-attribute 'default nil :height 140)))))
 #+END_SRC
 
 ** General Settings
@@ -255,39 +187,6 @@ depending on cursor position:
 (setq-default tab-always-indent nil)
 #+END_SRC
 
-*** Ido Mode
-    Enable ido-mode and ido-everywhere:
-
-#+BEGIN_SRC emacs-lisp
-(ido-mode 1)
-(ido-everywhere 1)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package ido-completing-read+
-  :config
-  (ido-ubiquitous-mode 1))
-#+END_SRC
-
-    Makes ido-mode display vertically:
-
-#+BEGIN_SRC emacs-lisp
-(use-package ido-vertical-mode
-  :config
-  (ido-vertical-mode 1)
-  :custom
-  (ido-vertical-define-keys 'C-n-and-C-p-only))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package flx-ido
-  :config
-  (flx-ido-mode 1)
-  :custom
-  (ido-enable-flex-matching t)
-  (ido-use-faces nil))
-#+END_SRC
-
 *** Backup Files
     Remove all backup files:
 
@@ -346,13 +245,7 @@ depending on cursor position:
 
 #+BEGIN_SRC emacs-lisp
   (set-frame-font "Fira Code")
-  ;; (set-frame-font "More Perfect DOS VGA")
-  ;; (set-frame-font "Unifont")
-  ;; (set-frame-font "Terminus:antialias=none")
   (set-face-attribute 'default nil :height 140)
-  ;; (set-frame-font "Monaco")
-  ;; (set-frame-font "Gohu GohuFont")
-  ;; (set-face-attribute 'default nil :height 120)
 #+END_SRC
 
     For Arch-Linux:
@@ -369,6 +262,7 @@ depending on cursor position:
 (setq-default custom-file "~/.emacs.d/auto-generated-customized-settings.el")
 (load-file custom-file)
 #+END_SRC
+
 ** Functions
 
 #+BEGIN_SRC emacs-lisp
@@ -396,6 +290,7 @@ depending on cursor position:
     (beginning-of-line))
   )
 #+END_SRC
+
 ** Key Bindings
    Override [C-k] (kill-to-end-of-line).
 the bind-key* (with star) will override key bindings in all minor modes:
@@ -403,27 +298,17 @@ the bind-key* (with star) will override key bindings in all minor modes:
 #+BEGIN_SRC emacs-lisp
 (bind-key* "C-k" 'tareifz/kill-line)
 #+END_SRC
+
 ** Themes
 *** Custom User Themes
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (load-file "~/.emacs.d/themes/tareifz-basic-theme.el")
-;; (load-file "~/.emacs.d/themes/tareifz-shadows-theme.el")
-;; (load-file "~/.emacs.d/themes/tareifz-shadow-theme.el")
 #+END_SRC
 
 *** Theme packages
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package sourcerer-theme)
-  ;; (use-package dracula-theme)
-  ;; (use-package atom-one-dark-theme)
-  ;; (use-package hydandata-light-theme)
-  ;; (use-package panda-theme)
-  ;; (use-package hemera-theme)
-  ;; (use-package monokai-pro-theme)
-  ;; (use-package cherry-blossom-theme)
 (use-package modus-operandi-theme)
 #+END_SRC
 
@@ -443,7 +328,10 @@ Templetes to be inserted for new files
 *** [org-mode]
 
 #+BEGIN_SRC emacs-lisp
-(use-package org)
+(use-package org
+  :config
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively t))
 #+END_SRC
 
 *** [try]
@@ -456,7 +344,7 @@ Templetes to be inserted for new files
 *** [rainbow-mode]
     Represent colors with the color they represent as background:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (use-package rainbow-mode
   :hook
   (prog-mode . rainbow-mode))
@@ -499,19 +387,6 @@ Templetes to be inserted for new files
 (use-package rust-mode)
 #+END_SRC
 
-*** [racer]
-    Provide rust code completion with Company:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-;; rustup component add rust-src
-;; cargo install racer
-(use-package racer
-  :requires rust-mode
-  :hook
-  ((rust-mode . racer-mode)
-   (racer-mode . eldoc-mode)))
-#+END_SRC
-
 *** [multiple-cursors]
 
 #+BEGIN_SRC emacs-lisp
@@ -529,39 +404,6 @@ Templetes to be inserted for new files
 (use-package switch-window
   :bind
   ("C-x o" . switch-window))
-#+END_SRC
-
-*** [web-mode]
-
-#+BEGIN_SRC emacs-lisp
-(use-package web-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-#+END_SRC
-
-*** [js2-mode]
-
-#+BEGIN_SRC emacs-lisp
-(use-package js2-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-#+END_SRC
-
-*** [impatient-mode]
-    Start a server and auto-refresh the page when change happens:
-
-#+BEGIN_SRC emacs-lisp
-;; M-x httpd-start
-;; M-x impatient-mode
-;; http://localhost:8080/imp/
-(use-package impatient-mode)
 #+END_SRC
 
 *** [which-key]
@@ -605,34 +447,6 @@ Templetes to be inserted for new files
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 #+END_SRC
 
-*** [geiser]
-    Scheme tools for Emacs:
-#+BEGIN_SRC emacs-lisp :tangle no
-;; C-c C-b === eval-buffer
-;; C-c C-c === eval-definition.
-(use-package geiser
-  :config
-  (setq geiser-active-implementations '(guile)))
-#+END_SRC
-
-*** [flymd]
-    Live markdown preview:
-
-#+BEGIN_SRC emacs-lisp
-(use-package flymd
-  :custom
-  (flymd-output-directory "~/.flymd/"))
-#+END_SRC
-
-*** [emmet-mode]
-    Expand expression to HTML elements:
-
-#+BEGIN_SRC emacs-lisp
-;; [C-j] to expand
-(use-package emmet-mode
-  :hook (web-mode . emmet-mode))
-#+END_SRC
-
 *** [diff-hl]
     Highlight git changes in buffer:
 
@@ -642,6 +456,7 @@ Templetes to be inserted for new files
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
 #+END_SRC
+
 *** [projectile]
 
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -651,15 +466,6 @@ Templetes to be inserted for new files
   :config
   (projectile-mode +1))
 #+END_SRC
-*** [prettier-js]
-
-#+BEGIN_SRC emacs-lisp
-(use-package prettier-js
-  :hook (js2-mode . prettier-js-mode)
-  :config
-  (setq prettier-js-args '(
-    "--trailing-comma" "es5")))
-#+END_SRC
 
 *** [crystal-mode]
 
@@ -667,61 +473,10 @@ Templetes to be inserted for new files
 (use-package crystal-mode)
 #+END_SRC
 
-*** [API Blueprint Mode]
-
-#+BEGIN_SRC emacs-lisp
-(use-package apib-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode)))
-#+END_SRC
-
-*** [eyebrowse-mode]
-
-#+BEGIN_SRC emacs-lisp
-(use-package eyebrowse
-  :config
-  (eyebrowse-mode t))
-#+END_SRC
-
-*** [indent-guide]
-
-#+BEGIN_SRC emacs-lisp
-(use-package indent-guide
-  :config
-  (indent-guide-global-mode))
-#+END_SRC
-
-*** [all-the-icons]
-
-#+BEGIN_SRC emacs-lisp
-(use-package all-the-icons)
-#+END_SRC
-
-*** [neotree]
-
-#+BEGIN_SRC emacs-lisp
-(use-package neotree
-  :bind
-  ("<f5>" . neotree-toggle)
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-#+END_SRC
-
 *** [magit]
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit)
-#+END_SRC
-
-*** [spaceline-config]
-
-#+BEGIN_SRC emacs-lisp
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (setq powerline-default-separator 'bar
-        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-(spaceline-spacemacs-theme))
 #+END_SRC
 
 *** [hl-todo]
@@ -814,18 +569,25 @@ Language Server Protocol Support for Emacs
   (auto-package-update-maybe))
 #+END_SRC
 
-*** [focus]
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package focus
-  :hook
-  (prog-mode . focus-mode))
-#+END_SRC
-
 *** [restclient]
 
 #+BEGIN_SRC emacs-lisp
 (use-package restclient
   :config
     (add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode)))
+#+END_SRC
+
+*** [ivy]
+
+#+BEGIN_SRC emacs-lisp
+(use-package ivy
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (ivy-mode 1))
+
+(use-package counsel
+  :config
+  (counsel-mode))
 #+END_SRC
