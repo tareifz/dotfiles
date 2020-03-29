@@ -319,7 +319,7 @@ Templetes to be inserted for new files
 #+BEGIN_SRC emacs-lisp
 (defun insert-crystal-template()
   (when (= (point-max) (point-min))
-    (insert-file "./templates/crystal.cr")))
+    (insert-file "~/.emacs.d/templates/crystal.cr")))
 
 (add-hook 'crystal-mode-hook 'insert-crystal-template)
 #+END_SRC
@@ -590,4 +590,13 @@ Language Server Protocol Support for Emacs
 (use-package counsel
   :config
   (counsel-mode))
+#+END_SRC
+
+*** [highlight-thing]
+    Global minor mode to highlight the thing under point
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-thing
+    :hook
+    (prog-mode . highlight-thing-mode))
 #+END_SRC

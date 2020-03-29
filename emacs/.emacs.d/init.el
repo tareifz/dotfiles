@@ -129,7 +129,7 @@
 
 (defun insert-crystal-template()
   (when (= (point-max) (point-min))
-    (insert-file "./templates/crystal.cr")))
+    (insert-file "~/.emacs.d/templates/crystal.cr")))
 
 (add-hook 'crystal-mode-hook 'insert-crystal-template)
 
@@ -258,3 +258,7 @@
 (use-package counsel
   :config
   (counsel-mode))
+
+(use-package highlight-thing
+  :hook
+  (prog-mode . highlight-thing-mode))
