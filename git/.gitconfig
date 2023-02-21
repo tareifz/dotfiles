@@ -1,0 +1,33 @@
+[user]
+	name = tareifz
+	email = root@tareifz.me
+	signingkey = 453A3C4E3FD943D5
+
+[core]
+	editor = code --wait
+	excludesfile = ~/.gitignore
+
+[web]
+	browser = firefox
+
+[color]
+	ui = auto
+
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[commit]
+	gpgsign = true
