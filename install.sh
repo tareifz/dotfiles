@@ -7,6 +7,7 @@ apx update --aur
 apx upgrade --aur
 
 apx install --aur --assume-yes openssh firefox git stow rustup rust-analyzer visual-studio-code-bin ttf-arabeyes-fonts ttf-fira-code crystal shards nodejs npm emacs-nativecomp
+apx install --aur --assume-yes jdk-openjdk openjdk-doc openjdk-src clojure leiningen rlwrap
 
 apx export --aur --bin git
 apx export --aur --bin code
@@ -19,6 +20,12 @@ apx export --aur --bin npx
 apx export --aur --bin emacs
 apx export --aur --bin emacsclient
 apx export --aur --bin rust-analyzer
+apx export --aur --bin java
+apx export --aur --bin javac
+apx export --aur --bin clj
+apx export --aur --bin clojure
+apx export --aur --bin lein
+apx export --aur --bin rlwrap
 
 apx export --aur code
 apx export --aur emacs
