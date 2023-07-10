@@ -8,6 +8,7 @@ apx upgrade --aur
 
 apx install --aur --assume-yes openssh firefox git stow rustup rust-analyzer visual-studio-code-bin ttf-arabeyes-fonts ttf-fira-code crystal shards nodejs npm emacs-nativecomp
 apx install --aur --assume-yes jdk-openjdk openjdk-doc openjdk-src clojure leiningen rlwrap
+apx install --aur --assume-yes noto-fonts-emoji # emoji support
 
 apx export --aur --bin git
 apx export --aur --bin code
